@@ -23,7 +23,7 @@ module.exports = {
 
         const embed = new MessageEmbed()
             .setColor("#000001")
-            .setDescription(`\`🔊\` | **Volume chage to:** \`Earrape\``);
+            .setDescription(`\`🔊\` | **Volume charge to:** \`Earrape\``);
 
         msg.edit('', embed);
 
