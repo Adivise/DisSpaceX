@@ -19,14 +19,15 @@ module.exports = {
         if (!permissions.has("SPEAK")) return message.channel.send("I cannot connect to your voice channel, make sure I have permission to!");
 
         const queue = client.distube.getQueue(message)
-        if (!queue) return message.channel.send(`There is nothing in the queue right now!`)
+        if (!queue) msg.edit(`There is nothing in the queue right now!`)
         client.distube.setFilter(message, false)
+        queue.setVolume(50)
 
         const embed = new MessageEmbed()
             .setAuthor('Filter has been: Reseted', 'https://cdn.discordapp.com/emojis/758423098885275748.gif')
             .setColor('#000001');
 
-        await delay(5000);
+        await delay(3000);
         msg.edit('', embed)
     }
 }; /// testing version

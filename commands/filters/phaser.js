@@ -19,7 +19,7 @@ module.exports = {
         if (!permissions.has("SPEAK")) return message.channel.send("I cannot connect to your voice channel, make sure I have permission to!");
 
         const queue = client.distube.getQueue(message)
-        if (!queue) return message.channel.send(`There is nothing in the queue right now!`)
+        if (!queue) msg.edit(`There is nothing in the queue right now!`)
         client.distube.setFilter(message, "phaser")
 
         const embed = new MessageEmbed()

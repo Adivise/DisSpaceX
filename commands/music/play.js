@@ -16,7 +16,7 @@ module.exports = {
         if (!permissions.has("SPEAK")) return message.channel.send("I cannot connect to your voice channel, make sure I have permission to!");
 
         const string = args.join(" ")
-        if (!string) return message.channel.send(`Please enter a song url or query to search.`)
+        if (!string) msg.edit(`Please enter a song url or query to search.`)
         try {
             client.distube.play(message, string)
         } catch (e) {

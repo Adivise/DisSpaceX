@@ -19,10 +19,10 @@ module.exports = {
         if (!permissions.has("SPEAK")) return message.channel.send("I cannot connect to your voice channel, make sure I have permission to!");
 
         const queue = client.distube.getQueue(message)
-        if (!queue) return message.channel.send(`There is nothing in the queue right now!`)
+        if (!queue) msg.edit(`There is nothing in the queue right now!`)
         if (args[0] === "off" && queue.filters?.length) queue.setFilter(false)
         else if (Object.keys(client.distube.filters).includes(args[0])) queue.setFilter(args[0])
-        else if (args[0]) return message.channel.send(`Invalid filter!`)
+        else if (args[0]) msg.edit(`Invalid filter!`)
 
         const embed = new MessageEmbed()
             .setAuthor(`Currently Filter`, 'https://cdn.discordapp.com/emojis/741605543046807626.gif')

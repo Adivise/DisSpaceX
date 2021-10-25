@@ -18,10 +18,11 @@ module.exports = {
         if (!permissions.has("SPEAK")) return message.channel.send("I cannot connect to your voice channel, make sure I have permission to!");
 
         const queue = client.distube.getQueue(message)
-            if (!queue) return message.channel.send(`There is nothing in the queue right now!`)
+            if (!queue) msg.edit(`There is nothing in the queue right now!`)
+            
         const volume = parseInt(args[0])
-            if (isNaN(volume)) return message.channel.send(`Please provide a number between 1 and 100`)
-            if (Number(volume) < 1 || Number(volume) > 100) return message.channel.send(`Please provide a number between 1 and 100`)
+            if (isNaN(volume)) msg.edit(`Please provide a number between 1 and 100`)
+            if (Number(volume) < 1 || Number(volume) > 100) msg.edit(`Please provide a number between 1 and 100`)
 
         queue.setVolume(volume)
 

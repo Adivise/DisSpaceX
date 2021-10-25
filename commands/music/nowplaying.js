@@ -20,7 +20,7 @@ module.exports = {
 
 
         const queue = client.distube.getQueue(message)
-        if (!queue) return message.channel.send(`There is nothing in the queue right now!`)
+        if (!queue) msg.edit(`There is nothing in the queue right now!`)
         const csong = queue.songs[0];
         const uni = csong.playing ? '⏸️ |' : '🔴 |';
         const part = Math.floor((queue.currentTime / queue.songs[0].duration) * 30);

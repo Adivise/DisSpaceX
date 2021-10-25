@@ -1,13 +1,15 @@
+const { MessageEmbed } = require('discord.js');
+
 module.exports = { 
     config: {
-        name: "play",
-        description: "Play a song/playlist or search for a song from youtube",
-        usage: "<results>",
-        category: "music",
+        name: "earrape",
+        description: "Make bot super louder!",
+        category: "filters",
         accessableby: "Member",
-        aliases: ["p", "pplay"]
+        aliases: []
     },
     run: async (client, message, args) => {
+        const msg = await message.channel.send("Processing.....");
         const { channel } = message.member.voice;
         if (!channel) return message.channel.send("You need to be in a voice channel to play music.");
 
@@ -15,12 +17,15 @@ module.exports = {
         if (!permissions.has("CONNECT")) return message.channel.send("I cannot connect to your voice channel, make sure I have permission to!");
         if (!permissions.has("SPEAK")) return message.channel.send("I cannot connect to your voice channel, make sure I have permission to!");
 
-        const string = args.join(" ")
-        if (!string) msg.edit(`Please enter a song url or query to search.`)
-        try {
-            client.distube.play(message, string)
-        } catch (e) {
-            message.channel.send(`Error: \`${e}\``)
-        }
+        const queue = client.distube.getQueue(message)
+            if (!queue) msg.edit(`There is nothing in the queue right now!`)
+        queue.setVolume(1000)
+
+        const embed = new MessageEmbed()
+            .setColor("#000001")
+            .setDescription(`\`🔊\` | **Volume chage to:** \`Earrape\``);
+
+        msg.edit('', embed);
+
     }
 };
