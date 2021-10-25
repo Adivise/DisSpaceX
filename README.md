@@ -72,11 +72,10 @@ Copy or Rename `config.json.example` to `config.json` and fill out the values:
 
 - [CLICK ME!](https://imgur.com/a/qzgEhTd)
 
-![see](https://i.imgur.com/wvSDhJ0.png)
-![see](https://i.imgur.com/XjVuX8K.png)
-![see](https://i.imgur.com/ThSvWPx.png)
-![see](https://i.imgur.com/jncxeNu.png)
-![see](https://i.imgur.com/7mDFd30.png)
-![see](https://i.imgur.com/jL1IMeW.png)
-![see](https://i.imgur.com/5461gRn.png)
-![see](https://i.imgur.com/42PavqR.png)
+![see](https://i.imgur.com/03KM8sq.png)
+![see](https://i.imgur.com/lr4whgX.png)
+![see](https://i.imgur.com/Uv1JX4f.png)
+![see](https://i.imgur.com/CqKhn2a.png)
+![see](https://i.imgur.com/sbkZXnb.png)
+![see](https://i.imgur.com/4GGIXyZ.png)
+![see](https://i.imgur.com/poraMNP.png)
