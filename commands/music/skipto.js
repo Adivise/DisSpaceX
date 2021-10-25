@@ -9,7 +9,6 @@ module.exports = {
         aliases: ["st"]
     },
     run: async (client, message, args) => {
-        const msg = await message.channel.send("Processing.....");
         const { channel } = message.member.voice;
         if (!channel) return message.channel.send("You need to be in a voice channel to play music.");
 
@@ -18,22 +17,18 @@ module.exports = {
         if (!permissions.has("SPEAK")) return message.channel.send("I cannot connect to your voice channel, make sure I have permission to!");
 
         const queue = client.distube.getQueue(message)
-        if (!queue) msg.edit(`There is nothing in the queue right now!`)
+        if (!queue) return message.channel.send(`There is nothing in the queue right now!`)
+        const song = parseInt(args[0])
+        if (isNaN(song)) return message.channel.send(`Please provide a number`)
+        if (Number(song) < 0 || Number(song) > 100) return message.channel.send(`Please provide a number between 0 and 100`)
 
-        if (isNaN(args[0])) {
-            const embed = new MessageEmbed()
-                .setColor('#000001')
-                .setDescription(`Please enter a valid number!`);
-            msg.edit('', embed);
-        }
-
-        client.distube.jump(message, parseInt(args[0]))
+        client.distube.jump(message, song)
         .then(queue => {
             const embed = new MessageEmbed()
-                .setDescription(`\`⏭\` | **Skipto:** ${args[0]}`)
+                .setDescription(`\`⏭\` | **Skipto:** ${song}`)
                 .setColor("#000001")
 
-            msg.edit('', embed);
+            message.channel.send(embed);
         })
     }
 };

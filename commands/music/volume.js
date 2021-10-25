@@ -29,7 +29,7 @@ module.exports = {
             .setColor("#000001")
             .setDescription(`\`🔊\` | **Change volume to:** \`${volume}\``);
 
-        message.channel.send('', embed);
+        message.channel.send(embed);
 
     }
 };
