@@ -72,7 +72,7 @@ Copy or Rename `config.json.example` to `config.json` and fill out the values:
 
 ## Picture
 
-- [CLICK ME!](https://imgur.com/a/qzgEhTd)
+- [CLICK ME!](https://imgur.com/a/zvP3NIi)
 
 ![see](https://i.imgur.com/03KM8sq.png)
 ![see](https://i.imgur.com/lr4whgX.png)
