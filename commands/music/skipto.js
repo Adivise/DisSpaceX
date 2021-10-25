@@ -20,7 +20,7 @@ module.exports = {
         if (!queue) return message.channel.send(`There is nothing in the queue right now!`)
         const song = parseInt(args[0])
         if (isNaN(song)) return message.channel.send(`Please provide a number`)
-        if (Number(song) < 0 || Number(song) > 100) return message.channel.send(`Please provide a number between 0 and 100`)
+        if (Number(song) < 1 || Number(song) > 100) return message.channel.send(`Please provide a number between 1 and 100`)
 
         client.distube.jump(message, song)
         .then(queue => {
