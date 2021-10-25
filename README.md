@@ -4,7 +4,8 @@
 
 ## Requirements
 
-1. Discord Bot Token **[Guide](https://discordjs.guide/preparations/setting-up-a-bot-application.html#creating-your-bot)**
+Discord Bot Token **[Guide](https://discordjs.guide/preparations/setting-up-a-bot-application.html#creating-your-bot)**
+FFmpeg **[Download](https://github.com/BtbN/FFmpeg-Builds)**
 
 ## Installation
 
