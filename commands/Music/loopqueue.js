@@ -1,9 +1,9 @@
 const { MessageEmbed } = require("discord.js");
 
 module.exports = {
-    name: "loop",
+    name: "loopqueue",
     category: "Music",
-    aliases: ["repeat", "l"],
+    aliases: ["lq"],
     cooldown: 3,
     description: "make song to loop",
     memberpermissions: [],
@@ -15,18 +15,18 @@ module.exports = {
         const memberVoice = message.member.voice.channel;
         if (!memberVoice) return msg.edit("You need to be in a voice channel to use command.");
 
-        if (queue.repeatMode === 0) {
-                client.distube.setRepeatMode(message, 1);
-                const embed = new MessageEmbed()
-                    .setColor("#000001")
-                    .setDescription(`\`🔁\` | **Song is loop:** \`All\``)
-
-                msg.edit({ content: ' ', embeds: [embed] });
-            } else {
+        if (queue.repeatMode === 2) {
                 client.distube.setRepeatMode(message, 0);
                 const embed = new MessageEmbed()
                     .setColor("#000001")
-                    .setDescription(`\`🔁\` | **Song is unloop:** \`Current\``)
+                    .setDescription(`\`🔁\` | **Song is unloop:** \`All\``)
+
+                msg.edit({ content: ' ', embeds: [embed] });
+            } else {
+                client.distube.setRepeatMode(message, 2);
+                const embed = new MessageEmbed()
+                    .setColor("#000001")
+                    .setDescription(`\`🔁\` | **Song is loop:** \`All\``)
 
                 msg.edit({ content: ' ', embeds: [embed] });
             }
