@@ -36,15 +36,16 @@ Copy or Rename `config.json.example` to `config.json` and fill out the values:
 🎶 **Music Commands!** 
 - Play (#play, #p, #pplay) can play song from youtube, soundcloud and spotify
 - Nowplaying (#nowplaying, #np)
-- Queue (#q)
-- Repeat (#loop (song, all), #repeat (song, all))
+- Queue (#queue <page>, #q <page>)
+- Loop (#loop, #l)
+- Loopqueue (#loopqueue, #lq)
 - Shuffle (#shuffle)
 - Volume control (#vol)
 - Pause (#pause, #pa)
 - Resume (#resume, #re)
 - Skip (#skip, #s)
 - Skipto (#skipto, #st)
-- Join (#join, #cmon)
+- Join (#join, #cmon, summon)
 - Leave (#leave, #dc, #lev, #stop)
 
 ⏺ **Filter Commands!**
@@ -81,3 +82,5 @@ Copy or Rename `config.json.example` to `config.json` and fill out the values:
 ![see](https://i.imgur.com/sbkZXnb.png)
 ![see](https://i.imgur.com/4GGIXyZ.png)
 ![see](https://i.imgur.com/poraMNP.png)
+		
+thx for handler [Tomato6966](https://github.com/Tomato6966)
