@@ -2,22 +2,17 @@ const lyricsfinder = require('lyrics-finder');
 const { MessageEmbed } = require('discord.js');
 
 module.exports = { 
-    config: {
-        name: "lyrics",
-        description: "see lyrics the song!",
-        usage: "<results>",
-        category: "music",
-        accessableby: "Member",
-        aliases: []
-    },
+    name: "lyrics",
+    category: "Music",
+    aliases: [],
+    cooldown: 3,
+    description: "Display lyrics current song!",
+    memberpermissions: [],
+
     run: async (client, message, args) => {
         const msg = await message.channel.send("Searching for lyrics...");
-        const { channel } = message.member.voice;
-        if (!channel) return message.channel.send("You need to be in a voice channel to play music.");
-
-        const permissions = channel.permissionsFor(client.user);
-        if (!permissions.has("CONNECT")) return message.channel.send("I cannot connect to your voice channel, make sure I have permission to!");
-        if (!permissions.has("SPEAK")) return message.channel.send("I cannot connect to your voice channel, make sure I have permission to!");
+        const memberVoice = message.member.voice.channel;
+        if (!memberVoice) return msg.edit("You need to be in a voice channel to use command.");
 
         const queue = client.distube.getQueue(message)
         if (!queue) msg.edit(`There is nothing in the queue right now!`)
@@ -46,7 +41,7 @@ module.exports = {
             lyricsEmbed.setDescription("Lyrics too long to display!");
         }
 
-        msg.edit('', lyricsEmbed)
+        msg.edit({ content: ' ', embeds: [lyricsEmbed] })
         .then(n => {
             var total = queue.songs[0].duration * 1000;
             var current = queue.currentTime * 1000;

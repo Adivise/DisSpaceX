@@ -1,32 +1,37 @@
-const { MessageEmbed } = require('discord.js');
+const { MessageEmbed } = require("discord.js");
 
-module.exports = { 
-    config: {
-        name: "autoplay",
-        description: "autoplay the song!",
-        category: "music",
-        accessableby: "Member",
-        aliases: []
-    },
+module.exports = {
+    name: "autoplay",
+    category: "Music",
+    aliases: ["ap"],
+    cooldown: 3,
+    usage: "make bot auto random play!",
+    description: "Playing music form souce.",
+    memberpermissions: [],
+
     run: async (client, message, args) => {
-        const msg = await message.channel.send("Processing...")
-        const { channel } = message.member.voice;
-        if (!channel) return message.channel.send("You need to be in a voice channel to play music.");
+        const msg = await message.channel.send("Processing.....");
+        const queue = client.distube.getQueue(message);
+        if (!queue) return msg.edit(`There is nothing in the queue right now!`);
+        const memberVoice = message.member.voice.channel;
+        if (!memberVoice) return msg.edit("You need to be in a voice channel to use command.");
 
-        const permissions = channel.permissionsFor(client.user);
-        if (!permissions.has("CONNECT")) return message.channel.send("I cannot connect to your voice channel, make sure I have permission to!");
-        if (!permissions.has("SPEAK")) return message.channel.send("I cannot connect to your voice channel, make sure I have permission to!");
-
-        const queue = client.distube.getQueue(message)
-        if (!queue) msg.edit(`There is nothing in the queue right now!`)
-        try {
-            const auto = queue.toggleAutoplay()
+        if (!queue.autoplay) {
+            client.distube.toggleAutoplay(message);
+    
             const embed = new MessageEmbed()
-                .setColor("#000001")
-                .setDescription(`\`⏯\` | **Autoplay has been:** \`${auto ? "Activated" : "Not Active"}\``)
+                .setColor(message.client.color)
+                .setDescription(`\`⏯\` Activate **Autoplay** mode.`)
 
-            msg.edit('', embed)
-    } catch (e) {
-        console.log(e)
+            msg.edit({ content: ' ', embeds: [embed] });
+        } else {
+            client.distube.toggleAutoplay(message);
+
+            const embed = new MessageEmbed()
+                .setColor(message.client.color)
+                .setDescription(`\`⏯\` Disable **Autoplay** mode.`)
+
+            msg.edit({ content: ' ', embeds: [embed] });
+        }
     }
-}};
+}

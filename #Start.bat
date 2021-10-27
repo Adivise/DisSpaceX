@@ -1,5 +1,4 @@
 @echo off
-color a
 title DisSpaceX
 
 :Reconnected

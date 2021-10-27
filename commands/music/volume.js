@@ -1,35 +1,48 @@
-const { MessageEmbed } = require('discord.js');
+const { MessageEmbed } = require("discord.js");
 
-module.exports = { 
-    config: {
-        name: "volume",
-        description: "change the volume of song!",
-        category: "music",
-        accessableby: "Member",
-        aliases: ["vol"]
-    },
+module.exports = {
+    name: "volume",
+    category: "Music",
+    aliases: ["vol", "v"],
+    cooldown: 3,
+    usage: "volume <number>",
+    description: "Skip the song!",
+    memberpermissions: [],
+
     run: async (client, message, args) => {
-        const { channel } = message.member.voice;
-        if (!channel) return message.channel.send("You need to be in a voice channel to play music.");
+        const msg = await message.channel.send("Processing.....");
+        const queue = client.distube.getQueue(message);
+        if (!queue) return msg.edit(`There is nothing in the queue right now!`);
+        const memberVoice = message.member.voice.channel;
+        if (!memberVoice) return msg.edit("You need to be in a voice channel to use command.");
 
-        const permissions = channel.permissionsFor(client.user);
-        if (!permissions.has("CONNECT")) return message.channel.send("I cannot connect to your voice channel, make sure I have permission to!");
-        if (!permissions.has("SPEAK")) return message.channel.send("I cannot connect to your voice channel, make sure I have permission to!");
+        const volume = parseInt(args[0]);
 
-        const queue = client.distube.getQueue(message)
-            if (!queue) return message.channel.send(`There is nothing in the queue right now!`)
+        if (!volume) {
+            const embed = new MessageEmbed()
+                .setColor("#000001")
+                .setDescription(`Current **volume** : \`${queue.volume}\`%`)
 
-        const volume = parseInt(args[0])
-            if (isNaN(volume)) return message.channel.send(`Please provide a number between 1 and 100`)
-            if (Number(volume) < 1 || Number(volume) > 100) return message.channel.send(`Please provide a number between 1 and 100`)
+            return msg.edit({ content: ' ', embeds: [embed] });
+        }
 
-        queue.setVolume(volume)
+        if (isNaN(volume)) {
+            const embed = new MessageEmbed()
+                .setColor("#000001")
+                .setDescription(`Please enter a valid number`);
+
+            return msg.edit({ content: ' ', embeds: [embed] });
+        }
+
+        if (Number(volume) < 1 || Number(volume) > 100) return msg.edit(`Please provide a number between 1 and 100`)
+
+        client.distube.setVolume(message, volume);
 
         const embed = new MessageEmbed()
             .setColor("#000001")
-            .setDescription(`\`🔊\` | **Change volume to:** \`${volume}\``);
+            .setDescription(`\`🔊\` | **Change volume to:** \`${args[0]}\`%`)
 
-        message.channel.send(embed);
+        msg.edit({ content: ' ', embeds: [embed] });
 
     }
-};
+}

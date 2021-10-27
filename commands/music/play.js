@@ -1,26 +1,35 @@
-module.exports = { 
-    config: {
-        name: "play",
-        description: "Play a song/playlist or search for a song from youtube",
-        usage: "<results>",
-        category: "music",
-        accessableby: "Member",
-        aliases: ["p", "pplay"]
-    },
+const { MessageEmbed } = require("discord.js");
+
+module.exports = {
+    name: "play",
+    category: "Music",
+    aliases: ["pp", "p"],
+    cooldown: 3,
+    usage: "play <song name or link etc.>",
+    description: "Playing music from souce.",
+    memberpermissions: [],
+
     run: async (client, message, args) => {
-        const { channel } = message.member.voice;
-        if (!channel) return message.channel.send("You need to be in a voice channel to play music.");
+        const clientVoice = message.guild.me.voice.channel;
+        const memberVoice = message.member.voice.channel;
 
-        const permissions = channel.permissionsFor(client.user);
-        if (!permissions.has("CONNECT")) return message.channel.send("I cannot connect to your voice channel, make sure I have permission to!");
-        if (!permissions.has("SPEAK")) return message.channel.send("I cannot connect to your voice channel, make sure I have permission to!");
-
-        const string = args.join(" ")
-        if (!string) msg.edit(`Please enter a song url or query to search.`)
-        try {
-            client.distube.play(message, string)
-        } catch (e) {
-            message.channel.send(`Error: \`${e}\``)
+        const string = args.join(" ");
+        if (!string) {
+            return message.channel.send("Please provide a song name or link.");
         }
+
+        if (clientVoice) {
+            if (clientVoice === memberVoice) {
+                client.distube.play(message, string);
+            } else {
+                const embed = new MessageEmbed()
+                    .setColor("#000001")
+                    .setDescription(`You must be in the same channel as ${message.client.user}`);
+                message.channel.send({ embeds: [embed] });
+            }
+        } else {
+            client.distube.play(message, string);
+        }
+
     }
-};
+}

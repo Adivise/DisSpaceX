@@ -1,34 +1,36 @@
-const { MessageEmbed } = require('discord.js');
+const { MessageEmbed } = require("discord.js");
 
-module.exports = { 
-    config: {
-        name: "skipto",
-        description: "skipto the song in queue!",
-        category: "music",
-        accessableby: "Member",
-        aliases: ["st"]
-    },
+module.exports = {
+    name: "skipto",
+    category: "Music",
+    aliases: ["st"],
+    cooldown: 3,
+    usege: "skipto <queue>",
+    description: "Skipto the song in queue!",
+    memberpermissions: [],
+
     run: async (client, message, args) => {
-        const { channel } = message.member.voice;
-        if (!channel) return message.channel.send("You need to be in a voice channel to play music.");
+        const msg = await message.channel.send("Processing.....");
+        const queue = client.distube.getQueue(message);
+        if (!queue) return msg.edit(`There is nothing in the queue right now!`);
+        const memberVoice = message.member.voice.channel;
+        if (!memberVoice) return msg.edit("You need to be in a voice channel to use command.");
 
-        const permissions = channel.permissionsFor(client.user);
-        if (!permissions.has("CONNECT")) return message.channel.send("I cannot connect to your voice channel, make sure I have permission to!");
-        if (!permissions.has("SPEAK")) return message.channel.send("I cannot connect to your voice channel, make sure I have permission to!");
-
-        const queue = client.distube.getQueue(message)
-        if (!queue) return message.channel.send(`There is nothing in the queue right now!`)
-        const song = parseInt(args[0])
-        if (isNaN(song)) return message.channel.send(`Please provide a number`)
-        if (Number(song) < 1 || Number(song) > 100) return message.channel.send(`Please provide a number between 1 and 100`)
-
-        client.distube.jump(message, song)
-        .then(queue => {
+        if (isNaN(args[0])) {
             const embed = new MessageEmbed()
-                .setDescription(`\`⏭\` | **Skipto:** ${song}`)
                 .setColor("#000001")
+                .setDescription(`Please enter a valid number!`);
 
-            message.channel.send(embed);
-        })
+            return msg.edit({ content: ' ', embeds: [embed] });
+        }
+
+        message.client.distube.jump(message, parseInt(args[0]))
+            .then(queue => {
+                const embed = new MessageEmbed()
+                    .setColor("#000001")
+                    .setDescription(`\`⏭\` | **Skipto:** ${args[0]}`)
+
+                msg.edit({ content: ' ', embeds: [embed] });
+            });
     }
-};
+}

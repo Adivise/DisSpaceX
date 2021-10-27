@@ -1,25 +1,21 @@
 const { MessageEmbed } = require('discord.js');
 const delay = require('delay');
 
-module.exports = { 
-    config: {
-        name: "reset",
-        description: "Makes sound bot to normal",
-        category: "filters",
-        accessableby: "Member",
-        aliases: []
-    },
+module.exports = {
+    name: "reset",
+    category: "Filters",
+    aliases: [],
+    cooldown: 2,
+    description: "Reset filter to normal.",
+    memberpermissions: ["MANAGE_MEMBERS"],
+
     run: async (client, message, args) => {
-        const msg = await message.channel.send("Processing...")
-        const { channel } = message.member.voice;
-        if (!channel) return message.channel.send("You need to be in a voice channel to play music.");
+        const msg = await message.channel.send("Processing.....")
+        const queue = client.distube.getQueue(message);
+        if (!queue) return msg.edit(`There is nothing in the queue right now!`);
+        const memberVoice = message.member.voice.channel;
+        if (!memberVoice) return msg.edit("You need to be in a voice channel to use command.");
 
-        const permissions = channel.permissionsFor(client.user);
-        if (!permissions.has("CONNECT")) return message.channel.send("I cannot connect to your voice channel, make sure I have permission to!");
-        if (!permissions.has("SPEAK")) return message.channel.send("I cannot connect to your voice channel, make sure I have permission to!");
-
-        const queue = client.distube.getQueue(message)
-        if (!queue) msg.edit(`There is nothing in the queue right now!`)
         client.distube.setFilter(message, false)
         queue.setVolume(50)
 
@@ -28,6 +24,6 @@ module.exports = {
             .setColor('#000001');
 
         await delay(3000);
-        msg.edit('', embed)
+        msg.edit({ content: ' ', embeds: [embed] });
     }
 }; /// testing version

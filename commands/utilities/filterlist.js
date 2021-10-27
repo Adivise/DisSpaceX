@@ -2,14 +2,13 @@ const { MessageEmbed } = require("discord.js");
 const { prefix } = require("../../config.json");
 
 module.exports = {
-    config: {
-        name: "filterlist",
-        aliases: ["fl"],
-        usage: "(command)",
-        category: "utilities",
-        description: "Displays all commands that the bot has.",
-        accessableby: "Members"
-    },
+    name: "filterlist",
+    category: "Utilities",
+    aliases: ["fl"],
+    cooldown: 3,
+    usage: "filter [name]",
+    description: "Display all filters.",
+
     run: async (client, message) => {
         const msg = await message.channel.send("Processing...");
         const embed = new MessageEmbed()
@@ -35,6 +34,6 @@ module.exports = {
             .setFooter(`Example: ${prefix}filter bassboost`)
             .setTimestamp()
 
-            msg.edit('', embed)
+            msg.edit({ content: ' ', embeds: [embed] })
         }
 }; // testing version

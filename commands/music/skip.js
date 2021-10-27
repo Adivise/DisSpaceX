@@ -1,34 +1,38 @@
-const { MessageEmbed } = require('discord.js');
+const { MessageEmbed } = require("discord.js");
 
-module.exports = { 
-    config: {
-        name: "skip",
-        description: "skip the song!",
-        category: "music",
-        accessableby: "Member",
-        aliases: ["s"]
-    },
+module.exports = {
+    name: "skip",
+    category: "Music",
+    aliases: ["s"],
+    cooldown: 3,
+    description: "Skip the song!",
+    memberpermissions: [],
+
     run: async (client, message, args) => {
         const msg = await message.channel.send("Processing.....");
-        const { channel } = message.member.voice;
-        if (!channel) return message.channel.send("You need to be in a voice channel to play music.");
+        const queue = client.distube.getQueue(message);
+        if (!queue) return msg.edit(`There is nothing in the queue right now!`);
+        const memberVoice = message.member.voice.channel;
+        if (!memberVoice) return msg.edit("You need to be in a voice channel to use command.");
 
-        const permissions = channel.permissionsFor(client.user);
-        if (!permissions.has("CONNECT")) return message.channel.send("I cannot connect to your voice channel, make sure I have permission to!");
-        if (!permissions.has("SPEAK")) return message.channel.send("I cannot connect to your voice channel, make sure I have permission to!");
+        if (queue.songs.length === 1) {
+            message.client.distube.stop(message)
+                .then(song => {
+                    const embed = new MessageEmbed()
+                        .setColor("#000001")
+                        .setDescription("\`⏭\` | **Song has been:** `Skipped`")
 
-        const queue = client.distube.getQueue(message)
-        if (!queue) msg.edit(`There is nothing in the queue right now!`)
-        try {
-            queue.skip();
-            const embed = new MessageEmbed()
-                .setDescription("\`⏭\` | **Song has been:** `Skipped`")
-                .setColor("#000001")
+                    msg.edit({ content: ' ', embeds: [embed] });
+                });
+        } else {
+            message.client.distube.skip(message)
+                .then(song => {
+                    const embed = new MessageEmbed()
+                        .setColor("#000001")
+                        .setDescription("\`⏭\` | **Song has been:** `Skipped`")
 
-            msg.edit('', embed);
-
-        } catch (error) {
-            console.error(error);
+                    msg.edit({ content: ' ', embeds: [embed] });
+                });
         }
     }
-};
+}

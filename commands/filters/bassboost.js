@@ -1,25 +1,21 @@
 const { MessageEmbed } = require('discord.js');
 const delay = require('delay');
 
-module.exports = { 
-    config: {
-        name: "bassboost",
-        description: "Makes sound bot so weird",
-        category: "filters",
-        accessableby: "Member",
-        aliases: ["bb"]
-    },
+module.exports = {
+    name: "bassboost",
+    category: "Filters",
+    aliases: ["bb"],
+    cooldown: 2,
+    description: "Turns on Bassboost filter.",
+    memberpermissions: ["MANAGE_MEMBERS"],
+
     run: async (client, message) => {
-        const msg = await message.channel.send("Processing...")
-        const { channel } = message.member.voice;
-        if (!channel) return message.channel.send("You need to be in a voice channel to play music.");
+        const msg = await message.channel.send("Processing.....")
+        const queue = client.distube.getQueue(message);
+        if (!queue) return msg.edit(`There is nothing in the queue right now!`);
+        const memberVoice = message.member.voice.channel;
+        if (!memberVoice) return msg.edit("You need to be in a voice channel to use command.");
 
-        const permissions = channel.permissionsFor(client.user);
-        if (!permissions.has("CONNECT")) return message.channel.send("I cannot connect to your voice channel, make sure I have permission to!");
-        if (!permissions.has("SPEAK")) return message.channel.send("I cannot connect to your voice channel, make sure I have permission to!");
-
-        const queue = client.distube.getQueue(message)
-        if (!queue) msg.edit(`There is nothing in the queue right now!`)
         client.distube.setFilter(message, "bassboost")
 
         const embed = new MessageEmbed()
@@ -27,6 +23,6 @@ module.exports = {
             .setColor('#000001');
 
         await delay(5000);
-        msg.edit('', embed)
+        msg.edit({ content: ' ', embeds: [embed] })
     }
 }; /// testing version
