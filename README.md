@@ -83,4 +83,4 @@ Copy or Rename `config.json.example` to `config.json` and fill out the values:
 ![see](https://i.imgur.com/4GGIXyZ.png)
 ![see](https://i.imgur.com/poraMNP.png)
 		
-thx for handle [Tomato6966](https://github.com/Tomato6966)
+thx for handler [Tomato6966](https://github.com/Tomato6966)
