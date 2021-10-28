@@ -19,7 +19,7 @@ module.exports = {
                 client.distube.setRepeatMode(message, 1);
                 const embed = new MessageEmbed()
                     .setColor("#000001")
-                    .setDescription(`\`🔁\` | **Song is loop:** \`All\``)
+                    .setDescription(`\`🔁\` | **Song is loop:** \`Current\``)
 
                 msg.edit({ content: ' ', embeds: [embed] });
             } else {
