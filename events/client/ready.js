@@ -67,8 +67,6 @@ module.exports = async (client) => {
 
     message.channel.send({ embeds: [embed] })
 })
-    .on("searchCancel", message => message.channel.send(`Searching canceled`))
-    .on('searchInvalidAnswer', message =>	message.channel.send(`searchInvalidAnswer`))
     .on("addList", (queue, playlist) => {
       let embed = new MessageEmbed()
         .setDescription(`**Queued • [${playlist.name}](${playlist.url})** \`${queue.formattedDuration}\` (${playlist.songs.length} tracks) • ${playlist.user}`)
@@ -76,12 +74,19 @@ module.exports = async (client) => {
 
     queue.textChannel.send({ embeds: [embed] })
 })
-    .on("empty", channel => channel.send("Voice channel is empty! Leaving the channel..."))
-    .on("searchNoResult", message => message.channel.send(`No result found!`))
+    .on("empty", queue => {
+      let embed = new MessageEmbed()
+        .setColor('#000001')
+        .setDescription(`**Channel is Empty!**`)
+
+        queue.textChannel.send({ embeds: [embed] })
+})
+    .on("searchNoResult", queue => queue.textChannel.send(`No result found!`))
     .on("finish", queue => {
       let embed = new MessageEmbed()
         .setDescription(`\`📛\` | **Song has been:** \`Ended\``)
         .setColor('#000001')
+
     queue.textChannel.send({ embeds: [embed] })
 })
   //  .on("disconnect", queue => queue.textChannel.send('Disconnected!'))
