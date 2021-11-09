@@ -9,7 +9,7 @@ module.exports = {
     memberpermissions: [],
 
     run: async (client, message, args) => {
-        const msg = await message.channel.send('Processing.....');
+		const msg = await message.channel.send('Processing.....');
         const queue = client.distube.getQueue(message);
         if (!queue) return msg.edit(`There is nothing in the queue right now!`);
         const memberVoice = message.member.voice.channel;

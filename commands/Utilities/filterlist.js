@@ -1,5 +1,5 @@
 const { MessageEmbed } = require("discord.js");
-const { prefix } = require("../../config.json");
+const { PREFIX } = require("../../config.json");
 
 module.exports = {
     name: "filterlist",
@@ -31,7 +31,7 @@ module.exports = {
             .addField('** **', `\`phaser\``, true)
             .addField('** **', `\`tremolo\``, true)
             .addField('** **', `\`earwax\``, true)
-            .setFooter(`Example: ${prefix}filter bassboost`)
+            .setFooter(`Example: ${PREFIX}filter bassboost`)
             .setTimestamp()
 
             msg.edit({ content: ' ', embeds: [embed] })

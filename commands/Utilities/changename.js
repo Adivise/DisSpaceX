@@ -1,5 +1,5 @@
 const { MessageEmbed } = require('discord.js');
-const { ownerid } = require('../../config.json');
+const { OWNER_ID } = require('../../config.json');
 
 module.exports = {
   name: "changename",
@@ -8,7 +8,7 @@ module.exports = {
   cooldown: 5,
   usage: "changename <NEW BOT NAME>",
   description: "Changes the Name of the BOT",
-  alloweduserids: ownerid,
+  alloweduserids: OWNER_ID,
   minargs: 1,
  
   run: async (client, message, args, plusArgs, cmdUser, text, prefix) => {

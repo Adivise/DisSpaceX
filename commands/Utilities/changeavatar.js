@@ -1,5 +1,5 @@
-var { MessageEmbed } = require('discord.js');
-var { ownerid } = require('../../config.json');
+const { MessageEmbed } = require('discord.js');
+const { OWNER_ID } = require('../../config.json');
 const fs = require('fs');
 const fetch = require('node-fetch');
 
@@ -10,7 +10,7 @@ module.exports = {
   cooldown: 5,
   usage: "changeavatar <Imagelink/Image>",
   description: "Changes the Avatar of the BOT: I SUGGEST YOU TO DO IT LIKE THAT: Type the command in the Chat, attach an Image to the Command (not via link, just add it) press enter",
-  alloweduserids: ownerid,
+  alloweduserids: OWNER_ID,
 
   run: async (client, message, args, plusArgs, cmdUser, text, prefix) => {
     try {

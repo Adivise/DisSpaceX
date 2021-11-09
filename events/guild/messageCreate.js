@@ -1,4 +1,4 @@
-const { prefix } = require('../../config.json');
+const { PREFIX } = require('../../config.json');
 const { onCoolDown, replacemsg } = require("../../handlers/functions.js");
 const Discord = require("discord.js");
 
@@ -7,7 +7,7 @@ module.exports = async (client, message) => {
     if(message.channel.partial) await message.channel.fetch();
     if(message.partial) await message.fetch();
 
-    const prefixRegex = new RegExp(`^(<@!?${client.user.id}>|${escapeRegex(prefix)})`);
+    const prefixRegex = new RegExp(`^(<@!?${client.user.id}>|${escapeRegex(PREFIX)})`);
     if(!prefixRegex.test(message.content)) return;
 
     const [, mPrefix] = message.content.match(prefixRegex);
@@ -22,7 +22,7 @@ module.exports = async (client, message) => {
             embeds: [new Discord.MessageEmbed()
               .setColor('#000001')
               .setTitle(replacemsg(`Please slowdown....`, {
-                prefix: prefix,
+                prefix: PREFIX,
                 command: command,
                 timeLeft: onCoolDown(message, command)
               }))]
@@ -37,7 +37,7 @@ module.exports = async (client, message) => {
                 .setTitle(replacemsg(`You are not allowed to run this command!`))
                 .setDescription(replacemsg(`You dont' have permissions!`, {
                   command: command,
-                  prefix: prefix
+                  prefix: PREFIX
                 }))]
             }).then(msg => {setTimeout(()=>{msg.delete().catch((e) => {console.log(String(e).grey)})}, `You dont' have permissions!`)}).catch((e) => {console.log(String(e).grey)});
           }
@@ -48,7 +48,7 @@ module.exports = async (client, message) => {
               .setTitle(replacemsg(`You are not allowed to run this command!`))
               .setDescription(replacemsg(`You need to have one of the Following Roles`, {
                 command: command,
-                prefix: prefix
+                prefix: PREFIX
               }))]
             }).then(msg => {setTimeout(()=>{msg.delete().catch((e) => {console.log(String(e).grey)})}, `You need to have one of the Following Roles`)}).catch((e) => {console.log(String(e).grey)});
             
@@ -60,7 +60,7 @@ module.exports = async (client, message) => {
               .setTitle(replacemsg(`You are not allowed to run this command!`))
               .setDescription(replacemsg(`You need to be one of the Owners`, {
                 command: command,
-                prefix: prefix
+                prefix: PREFIX
               }))]
             }).then(msg => {setTimeout(()=>{msg.delete().catch((e) => {console.log(String(e).grey)})}, `You need to be one of the Owners`)}).catch((e) => {console.log(String(e).grey)});
           }
@@ -98,19 +98,19 @@ module.exports = async (client, message) => {
             }).then(msg => {setTimeout(()=>{msg.delete().catch((e) => {console.log(String(e).grey)})}, 3000)}).catch((e) => {console.log(String(e).grey)});
           }
           //run the command with the parameters:  client, message, args, Cmduser, text, prefix,
-          command.run(client, message, args, args.join(" ").split("++").filter(Boolean), message.member, args.join(" "), prefix);
+          command.run(client, message, args, args.join(" ").split("++").filter(Boolean), message.member, args.join(" "), PREFIX);
         } catch (error) {
           if (true) {
             return message.reply({
               embeds: [new Discord.MessageEmbed()
                 .setColor('#000001')
                 .setTitle(replacemsg(`Something went wrong!`, {
-                  prefix: prefix,
+                  prefix: PREFIX,
                   command: command
                 }))
                 .setDescription(replacemsg(`\`\`\`${errormessage}\`\`\``, {
                   error: error,
-                  prefix: prefix,
+                  prefix: PREFIX,
                   command: command
                 }))]
             }).then(msg => {setTimeout(()=>{msg.delete().catch((e) => {console.log(String(e).grey)})}, 4000)}).catch((e) => {console.log(String(e).grey)});
@@ -120,8 +120,8 @@ module.exports = async (client, message) => {
         return message.reply({
           embeds: [new Discord.MessageEmbed()
             .setColor('#000001')
-            .setTitle(replacemsg(`Unkown command, try: **\`${prefix}help\`**`, {
-              prefix: prefix
+            .setTitle(replacemsg(`Unkown command, try: **\`${PREFIX}help\`**`, {
+              prefix: PREFIX
             }))]
         }).then(msg => {setTimeout(()=>{msg.delete().catch((e) => {console.log(String(e).grey)})}, 4000)}).catch((e) => {console.log(String(e).grey)});
 }

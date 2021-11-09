@@ -11,7 +11,7 @@ module.exports = (client) => {
                     client.commands.set(pull.name, pull);
                     amount++;
                 } else {
-                    console.log(file, `error -> missing a help.name, or help.name is not a string.`.brightRed);
+                    console.log(file, `error -> missing a help.name, or help.name is not a string.`);
                     continue;
                 }
                 if (pull.aliases && Array.isArray(pull.aliases)) pull.aliases.forEach((alias) => client.aliases.set(alias, pull.name));

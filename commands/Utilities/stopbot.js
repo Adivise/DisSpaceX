@@ -1,5 +1,5 @@
 const { MessageEmbed } = require('discord.js');
-const { ownerid } = require('../../config.json');
+const { OWNER_ID } = require('../../config.json');
 const chalk = require('chalk');
 
 module.exports = {
@@ -8,7 +8,7 @@ module.exports = {
   aliases: ["restart"],
   cooldown: 5,
   description: "Only owner the can't shutdown",
-  alloweduserids: ownerid,
+  alloweduserids: OWNER_ID,
 
   run: async (client, message) => {
 

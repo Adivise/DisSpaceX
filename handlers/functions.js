@@ -1,5 +1,5 @@
 const { MessageEmbed, Collection } = require("discord.js");
-  const { prefix } = require("../config.json");
+  const { PREFIX} = require("../config.json");
 
   module.exports.nFormatter = nFormatter;
   module.exports.change_status = change_status;
@@ -537,7 +537,7 @@ function onCoolDown(message, command) {
    */
    const { MessageButton, MessageActionRow } = require('discord.js')
    async function swap_pages(client, message, description, TITLE) {
-     let prefix = prefix;
+     let prefix = PREFIX;
      let cmduser = message.author;
    
      let currentPage = 0;
@@ -593,7 +593,7 @@ function onCoolDown(message, command) {
      //array of all embeds, here simplified just 10 embeds with numbers 0 - 9
      collector.on('collect', async b => {
          if(b.user.id !== message.author.id)
-           return b.reply(`<:no:833101993668771842> **Only the one who typed ${prefix}help is allowed to react!**`, true)
+           return b.reply(`<:no:833101993668771842> **Only the one who typed ${PREFIX}help is allowed to react!**`, true)
            //page forward
            if(b.customId == "1") {
              //b.reply("***Swapping a PAGE FORWARD***, *please wait 2 Seconds for the next Input*", true)
@@ -652,7 +652,7 @@ function onCoolDown(message, command) {
      //array of all embeds, here simplified just 10 embeds with numbers 0 - 9
      collector.on('collect', async b => {
          if(b.user.id !== message.author.id)
-           return b.reply(`<:no:833101993668771842> **Only the one who typed ${prefix}help is allowed to react!**`, true)
+           return b.reply(`<:no:833101993668771842> **Only the one who typed ${PREFIX}help is allowed to react!**`, true)
            //page forward
            if(b.customId == "1") {
              //b.reply("***Swapping a PAGE FORWARD***, *please wait 2 Seconds for the next Input*", true)
@@ -698,7 +698,7 @@ function onCoolDown(message, command) {
    */
   function change_status(client) {
     try {
-      client.user.setActivity(`${prefix}help | ${client.guilds.cache.size} Guilds | ${Math.ceil(client.users.cache.size/1000)}k Members`, {
+      client.user.setActivity(`${PREFIX}help | ${client.guilds.cache.size} Guilds | ${Math.ceil(client.users.cache.size/1000)}k Members`, {
         type: "PLAYING",
       });
     } catch (e) {

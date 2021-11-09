@@ -1,5 +1,9 @@
 {
-	"prefix": "#",
-	"token": "TOKENBOTHERE",
-	"ownerid": "OWNERIDHERE"
+    "TOKEN": "TOKEN_HERE",
+    "OWNER_ID": ["OWNER_ID_HERE"],
+    "PREFIX": "#",
+    "EMPTY_LEAVE": 60,
+    "LEAVE_FINISH": true,
+    "CLIENT_ID": "CLIENT_ID_HERE",
+    "GUILD_ID": "GUILD_ID_HERE"
 }
