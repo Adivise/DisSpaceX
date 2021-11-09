@@ -10,7 +10,7 @@ Discord Bot Token **[Guide](https://discordjs.guide/preparations/setting-up-a-bo
 
 FFmpeg **[Download](https://github.com/BtbN/FFmpeg-Builds)**
 
-Get Access Appication Command [Link](https://discord.com/api/oauth2/authorize?client_id=CLIENT_ID&permissions=0&scope=applications.commands%20bot) pt. paste BOTID to CLIENT_ID
+Get Access Appication Command **[Link](https://discord.com/api/oauth2/authorize?client_id=CLIENT_ID&permissions=0&scope=applications.commands%20bot)** pt. paste put `Appication id` to `CLIENT_ID` in the link
 
 ## Installation
 
