@@ -1,19 +1,20 @@
 const { MessageEmbed } = require("discord.js");
 
 module.exports = {
-    name: "nowplaying",
-    category: "Music",
-    aliases: ["np", "now"],
-    cooldown: 3,
-    description: "Display currently song!",
-    memberpermissions: [],
-
+    config: {
+        name: "nowplaying",
+        aliases: ["np", "now"],
+        description: "Displays the current song playing.",
+        accessableby: "Member",
+        category: "music",
+    },
     run: async (client, message, args) => {
 		const msg = await message.channel.send('Processing.....');
+
         const queue = client.distube.getQueue(message);
-        if (!queue) return msg.edit(`There is nothing in the queue right now!`);
-        const memberVoice = message.member.voice.channel;
-        if (!memberVoice) return msg.edit("You need to be in a voice channel to use command.");
+        if (!queue) msg.edit(`There is nothing in the queue right now!`)
+        const { channel } = message.member.voice;
+        if (!channel || message.member.voice.channel !== message.guild.me.voice.channel) return msg.edit("You need to be in a same/voice channel.")
 
         const uni = `${queue.songs[0].playing ? '⏸️ |' : '🔴 |'}`;
         const part = Math.floor((queue.currentTime / queue.songs[0].duration) * 30);

@@ -1,20 +1,20 @@
 const { MessageEmbed } = require("discord.js");
 
 module.exports = {
-    name: "skipto",
-    category: "Music",
-    aliases: ["st"],
-    cooldown: 3,
-    usege: "skipto <queue>",
-    description: "Skipto the song in queue!",
-    memberpermissions: [],
-
+    config: {
+        name: "skipto",
+        aliases: ["st"],
+        description: "Skip to a song in the queue.",
+        accessableby: "Member",
+        category: "music",
+    },
     run: async (client, message, args) => {
         const msg = await message.channel.send("Processing.....");
+
         const queue = client.distube.getQueue(message);
-        if (!queue) return msg.edit(`There is nothing in the queue right now!`);
-        const memberVoice = message.member.voice.channel;
-        if (!memberVoice) return msg.edit("You need to be in a voice channel to use command.");
+        if (!queue) msg.edit(`There is nothing in the queue right now!`)
+        const { channel } = message.member.voice;
+        if (!channel || message.member.voice.channel !== message.guild.me.voice.channel) return msg.edit("You need to be in a same/voice channel.")
 
         if (isNaN(args[0])) {
             const embed = new MessageEmbed()

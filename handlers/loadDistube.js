@@ -1,6 +1,8 @@
 const { readdirSync } = require("fs");
+const chalk = require("chalk");
+const delay = require("delay");
 
-module.exports = (client) => {
+module.exports = async (client) => {
     try {
         readdirSync("./events/distube/").forEach(file => {
             const event = require(`../events/distube/${file}`);
@@ -10,4 +12,6 @@ module.exports = (client) => {
     } catch (e) {
         console.log(e);
     }
+    await delay(4000);
+    console.log(chalk.greenBright(`[INFORMATION] Distube Events Loaded`));
 };

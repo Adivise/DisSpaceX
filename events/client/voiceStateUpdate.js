@@ -18,7 +18,7 @@ module.exports = async (client, oldState, newState) => {
           try{
             await newState.guild.me.voice.setSuppressed(false);
           }catch (e){
-            console.log(String(e).grey)
+            console.log(e)
           }
         }
         return
@@ -31,7 +31,7 @@ module.exports = async (client, oldState, newState) => {
           try{
             await newState.guild.me.voice.setSuppressed(false);
           }catch (e){
-            console.log(String(e).grey)
+            console.logg(e)
           }
         }
         return;

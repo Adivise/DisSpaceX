@@ -1,14 +1,13 @@
 const { MessageEmbed } = require("discord.js");
 
 module.exports = {
-    name: "play",
-    category: "Music",
-    aliases: ["pp", "p"],
-    cooldown: 3,
-    usage: "play <song name or link etc.>",
-    description: "Playing music from souce.",
-    memberpermissions: [],
-
+    config: {
+        name: "play",
+        aliases: ["pplay", "p"],
+        description: "Plays a song from the source.",
+        accessableby: "Member",
+        category: "music",
+    },
     run: async (client, message, args) => {
         const clientVoice = message.guild.me.voice.channel;
         const memberVoice = message.member.voice.channel;

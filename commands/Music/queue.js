@@ -2,18 +2,18 @@ const { MessageEmbed } = require("discord.js");
 const pagequeue = require('../../handlers/pagequeue.js');
 
 module.exports = {
-    name: "queue",
-    category: "Music",
-    aliases: ["q", "list"],
-    cooldown: 3,
-    description: "Displays the queue.",
-    memberpermissions: [],
-
+    config: {
+        name: "queue",
+        aliases: ["q", "que"],
+        description: "Diplay the queue",
+        accessableby: "Member",
+        category: "music",
+    },
     run: async (client, message, args) => {
         const queue = client.distube.getQueue(message);
-        if (!queue) return message.channel.send(`There is nothing in the queue right now!`)
-		const memberVoice = message.member.voice.channel;
-        if (!memberVoice) return msg.edit("You need to be in a voice channel to use command.");
+        if (!queue) message.channel.send(`There is nothing in the queue right now!`)
+        const { channel } = message.member.voice;
+        if (!channel || message.member.voice.channel !== message.guild.me.voice.channel) return message.channel.send("You need to be in a same/voice channel.")
 
 		const pagesNum = Math.ceil(queue.songs.length / 10);
 		if(pagesNum === 0) pagesNum = 1;

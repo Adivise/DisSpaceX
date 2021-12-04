@@ -1,20 +1,20 @@
 const { MessageEmbed } = require('discord.js');
 
 module.exports = { 
-    name: "shuffle",
-    category: "Music",
-    aliases: ["random", "mix"],
-    cooldown: 3,
-    description: "shuffle queue",
-    memberpermissions: [],
-
+    config: {
+        name: "shuffle",
+        aliases: ["mix"],
+        description: "Shuffles the current queue.",
+        accessableby: "Member",
+        category: "music",
+    },
     run: async (client, message, args) => {
         const msg = await message.channel.send("Processing.....");
-        const memberVoice = message.member.voice.channel;
-        if (!memberVoice) return msg.edit("You need to be in a voice channel to use command.");
 
-        const queue = client.distube.getQueue(message)
+        const queue = client.distube.getQueue(message);
         if (!queue) msg.edit(`There is nothing in the queue right now!`)
+        const { channel } = message.member.voice;
+        if (!channel || message.member.voice.channel !== message.guild.me.voice.channel) return msg.edit("You need to be in a same/voice channel.")
 
             client.distube.shuffle(message);
 

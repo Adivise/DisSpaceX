@@ -2,13 +2,14 @@ const { MessageEmbed } = require("discord.js");
 const { PREFIX } = require("../../config.json");
 
 module.exports = {
-    name: "filterlist",
-    category: "Utilities",
-    aliases: ["fl"],
-    cooldown: 3,
-    usage: "filter [name]",
-    description: "Display all filters.",
-
+    config: {
+        name: "filterlist",
+        aliases: ["fl"],
+        usage: "(command)",
+        category: "utilities",
+        description: "Displays all filters that the bot has.",
+        accessableby: "Members"
+    },
     run: async (client, message) => {
         const msg = await message.channel.send("Processing...");
         const embed = new MessageEmbed()

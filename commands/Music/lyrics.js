@@ -2,20 +2,20 @@ const lyricsfinder = require('lyrics-finder');
 const { MessageEmbed } = require('discord.js');
 
 module.exports = { 
-    name: "lyrics",
-    category: "Music",
-    aliases: [],
-    cooldown: 3,
-    description: "Display lyrics current song!",
-    memberpermissions: [],
-
+    config: {
+        name: "lyrics",
+        aliases: [],
+        description: "Display lyrics of a song",
+        accessableby: "Member",
+        category: "music",
+    },
     run: async (client, message, args) => {
         const msg = await message.channel.send("Searching for lyrics...");
-        const memberVoice = message.member.voice.channel;
-        if (!memberVoice) return msg.edit("You need to be in a voice channel to use command.");
 
-        const queue = client.distube.getQueue(message)
+        const queue = client.distube.getQueue(message);
         if (!queue) msg.edit(`There is nothing in the queue right now!`)
+        const { channel } = message.member.voice;
+        if (!channel || message.member.voice.channel !== message.guild.me.voice.channel) return msg.edit("You need to be in a same/voice channel.")
 
         let song = args.join(" ");
             let CurrentSong = queue.songs[0];

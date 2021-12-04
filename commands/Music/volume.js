@@ -1,20 +1,20 @@
 const { MessageEmbed } = require("discord.js");
 
 module.exports = {
-    name: "volume",
-    category: "Music",
-    aliases: ["vol", "v"],
-    cooldown: 3,
-    usage: "volume <number>",
-    description: "Skip the song!",
-    memberpermissions: [],
-
+    config: {
+        name: "volume",
+        aliases: ["vol", "v"],
+        description: "Changes the volume of the music playing.",
+        accessableby: "Member",
+        category: "music",
+    },
     run: async (client, message, args) => {
         const msg = await message.channel.send("Processing.....");
+
         const queue = client.distube.getQueue(message);
-        if (!queue) return msg.edit(`There is nothing in the queue right now!`);
-        const memberVoice = message.member.voice.channel;
-        if (!memberVoice) return msg.edit("You need to be in a voice channel to use command.");
+        if (!queue) msg.edit(`There is nothing in the queue right now!`)
+        const { channel } = message.member.voice;
+        if (!channel || message.member.voice.channel !== message.guild.me.voice.channel) return msg.edit("You need to be in a same/voice channel.")
 
         const volume = parseInt(args[0]);
 

@@ -1,13 +1,13 @@
 const { MessageEmbed } = require("discord.js");
 
 module.exports = {
-    name: "join",
-    category: "Music",
-    aliases: ["cmon", "summon"],
-    cooldown: 3,
-    description: "Join Voice Channel.",
-    memberpermissions: [],
-
+    config: {
+        name: "join",
+        aliases: ["summon"],
+        description: "Makes the bot join the voice channel.",
+        accessableby: "Member",
+        category: "music",
+    },
     run: async (client, message, args) => {
         const msg = await message.channel.send("Processing.....");
         const clientVoice = message.guild.me.voice.channel;

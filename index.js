@@ -1,14 +1,15 @@
 const { Intents, Client, Collection } = require("discord.js");
-const { readdirSync } = require("fs");
-const DisTube = require('distube');
+const { DisTube } = require('distube');
 const { SoundCloudPlugin } = require('@distube/soundcloud');
 const { SpotifyPlugin } = require('@distube/spotify');
 const { TOKEN, EMPTY_LEAVE, LEAVE_FINISH } = require('./config.json');
 
 const client = new Client({
     shards: "auto",
-    allowedMentions: { parse: ['users', 'roles'], repliedUser: true },
-    partials: ['MESSAGE', 'CHANNEL', 'REACTION', 'GUILD_MEMBER', 'USER'],
+    allowedMentions: {
+      parse: ["roles", "users", "everyone"],
+      repliedUser: false
+    },
     intents: [ 
         Intents.FLAGS.GUILDS,
         Intents.FLAGS.GUILD_MEMBERS,
@@ -18,7 +19,10 @@ const client = new Client({
     ],
 });
 
-const distube = new DisTube.DisTube(client, {
+process.on('unhandledRejection', error => console.log(error));
+process.on('uncaughtException', error => console.log(error));
+
+client.distube = new DisTube(client, {
   searchSongs: 0,
   searchCooldown: 30,
   leaveOnEmpty: true,
@@ -32,17 +36,8 @@ const distube = new DisTube.DisTube(client, {
   },
 });
 
-client.commands = new Collection();
-client.cooldowns = new Collection();
-client.aliases = new Collection();
-client.slashCommands = new Collection();
-client.categories = readdirSync(`./commands`);
-client.distube = distube;
+["aliases", "commands"].forEach(x => client[x] = new Collection());
+["loadCommands", "loadEvents", "loadDistube"].forEach(x => require(`./handlers/${x}`)(client));
 
-["events", "commands", "distube", "slashCommands"]
-    .filter(Boolean)
-    .forEach(h => {
-        require(`./handlers/${h}`)(client);
-})
 
 client.login(TOKEN)

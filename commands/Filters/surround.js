@@ -2,19 +2,20 @@ const { MessageEmbed } = require('discord.js');
 const delay = require('delay');
 
 module.exports = {
-    name: "surround",
-    category: "Filters",
-    aliases: ["sr"],
-    cooldown: 2,
-    description: "Turns on Surround filter.",
-    memberpermissions: ["MANAGE_MEMBERS"],
-
+    config: {
+        name: "surround",
+        description: "Turning on surround filter",
+        category: "filters",
+        accessableby: "Member",
+        aliases: ["sr"]
+    },
     run: async (client, message) => {
         const msg = await message.channel.send("Processing.....")
+        
         const queue = client.distube.getQueue(message);
-        if (!queue) return msg.edit(`There is nothing in the queue right now!`);
-        const memberVoice = message.member.voice.channel;
-        if (!memberVoice) return msg.edit("You need to be in a voice channel to use command.");
+        if (!queue) msg.edit(`There is nothing in the queue right now!`)
+        const { channel } = message.member.voice;
+        if (!channel || message.member.voice.channel !== message.guild.me.voice.channel) return msg.edit("You need to be in a same/voice channel.")
 
         client.distube.setFilter(message, "surround")
 
