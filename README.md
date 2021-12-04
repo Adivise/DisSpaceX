@@ -9,7 +9,7 @@
 - [x] SoundCloud
 - [x] Spotify
 
-## 🔩 Style
+## 🔩 Another MusicBot
 
 you looking for lavalink bot right? 
 
