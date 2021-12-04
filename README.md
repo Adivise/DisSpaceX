@@ -1,4 +1,21 @@
-## Requirements
+## 📑 Short Feature
+- [x] Music
+- [x] Filters
+- [x] No Database Requirement
+- [x] Easy to use
+
+## 🎶 Support Source
+- [x] Youtube
+- [x] SoundCloud
+- [x] Spotify
+
+## 🔩 Style
+
+you looking for lavalink bot right? 
+
+NanoSpace **[FORK](https://github.com/Adivise/NanoSpace)**
+
+## 🚨 Requirements
 
 Node.js V16+ **[Download](https://nodejs.org/dist/v17.0.1/node-v17.0.1-x64.msi)**
 
@@ -6,7 +23,7 @@ Discord Bot Token **[Guide](https://discordjs.guide/preparations/setting-up-a-bo
 
 FFmpeg **[Download](https://github.com/BtbN/FFmpeg-Builds)**
 
-## Installation
+## 💌 Installation
 
 ```
 git clone https://github.com/Adivise/DisSpaceX
@@ -15,7 +32,7 @@ npm install
 ```
 After installation finishes you can use `node .` to start the bot. or `Run Start.bat`
 
-## Configuration
+## 📚 Configuration
 
 Copy or Rename `config.json.example` to `config.json` and fill out the values:
 
@@ -29,7 +46,7 @@ Copy or Rename `config.json.example` to `config.json` and fill out the values:
 }
 ```
 
-## Features & Commands
+## 📄 Features & Commands
 
 > Note: The default prefix is '#'
 
@@ -72,7 +89,7 @@ Copy or Rename `config.json.example` to `config.json` and fill out the values:
 - Invite (#invite)
 - Restart (#restart, #stopbot, #shutdown)
 
-## Picture
+## 🖼 Picture
 
 - [CLICK ME!](https://imgur.com/a/zvP3NIi)
 
@@ -83,5 +100,3 @@ Copy or Rename `config.json.example` to `config.json` and fill out the values:
 ![see](https://i.imgur.com/sbkZXnb.png)
 ![see](https://i.imgur.com/4GGIXyZ.png)
 ![see](https://i.imgur.com/poraMNP.png)
-		
-thx for handler [Tomato6966](https://github.com/Tomato6966)
