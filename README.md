@@ -16,11 +16,10 @@
 
 ## 🔩 Another MusicBot
 
-you looking for lavalink bot right? 
+You looking for lavalink bot right? 
+- NanoSpace **[FORK NOW](https://github.com/Adivise/NanoSpace)**
 
-NanoSpace **[FORK](https://github.com/Adivise/NanoSpace)**
-
-## 🚨 Requirements
+##🛑 Requirements
 
 Node.js V16+ **[Download](https://nodejs.org/dist/v17.0.1/node-v17.0.1-x64.msi)**
 
