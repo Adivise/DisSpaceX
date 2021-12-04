@@ -9,6 +9,11 @@
 - [x] SoundCloud
 - [x] Spotify
 
+## 🚨 Have a Problem
+
+✈ Join Discord:  [NanoSpace ♪♪](https://discord.gg/SNG3dh3MbR)
+   mention me in chat #general or #javascript and ask problem okay! 👌
+
 ## 🔩 Another MusicBot
 
 you looking for lavalink bot right? 
