@@ -1,16 +1,10 @@
-## DisSpaceX
-
-![see](https://i.imgur.com/SmAftNm.jpg)
-
 ## Requirements
 
-Node.js V17+ **[Download](https://nodejs.org/dist/v17.0.1/node-v17.0.1-x64.msi)**
+Node.js V16+ **[Download](https://nodejs.org/dist/v17.0.1/node-v17.0.1-x64.msi)**
 
 Discord Bot Token **[Guide](https://discordjs.guide/preparations/setting-up-a-bot-application.html#creating-your-bot)**
 
 FFmpeg **[Download](https://github.com/BtbN/FFmpeg-Builds)**
-
-Get Access Appication Command **[Link](https://discord.com/api/oauth2/authorize?client_id=CLIENT_ID&permissions=0&scope=applications.commands%20bot)** pt. paste put `Appication id` to `CLIENT_ID` in the link
 
 ## Installation
 
@@ -31,9 +25,7 @@ Copy or Rename `config.json.example` to `config.json` and fill out the values:
     "OWNER_ID": ["OWNER_ID_HERE"],
     "PREFIX": "#",
     "EMPTY_LEAVE": 60,
-    "LEAVE_FINISH": true,
-    "CLIENT_ID": "CLIENT_ID_HERE",
-    "GUILD_ID": "GUILD_ID_HERE"
+    "LEAVE_FINISH": true
 }
 ```
 
@@ -77,6 +69,7 @@ Copy or Rename `config.json.example` to `config.json` and fill out the values:
 📑 **Utilities Commands!**
 - FilterList (#fl, #filterlist)
 - Help (#help, #h, #halp, #commands)
+- Invite (#invite)
 - Restart (#restart, #stopbot, #shutdown)
 
 ## Picture
