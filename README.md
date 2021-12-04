@@ -52,7 +52,7 @@ Copy or Rename `config.json.example` to `config.json` and fill out the values:
 - Vaporwave (#vaporwave, #vw)
 - earwax (#earwax)
 - Nightcore (#nightcore, nc)
-- 3d (#3d) <== use head for this feeling
+- 3d (#3d) <== use head phone for this feeling
 - echo (#echo)
 - flanger (#flanger, #fg)
 - gate (#gate)
