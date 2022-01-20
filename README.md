@@ -1,3 +1,20 @@
+## 📑 Short Feature
+- [x] Music
+- [x] Filters
+- [x] MessageButton
+- [x] No Database Requirement
+- [x] Easy to use
+
+## 🎶 Support Source
+- [x] Youtube
+- [x] SoundCloud
+- [x] Spotify
+
+## 🚨 Have a Problem
+
+✈ Join Discord:  [NanoSpace ♪♪](https://discord.gg/SNG3dh3MbR)
+   mention me in chat #general or #javascript and ask problem okay! 👌
+   
 ## Requirements
 
 Node.js V16+ **[Download](https://nodejs.org/dist/v17.0.1/node-v17.0.1-x64.msi)**
@@ -17,16 +34,12 @@ After installation finishes you can use `node .` to start the bot. or `Run Start
 
 ## Configuration
 
-Copy or Rename `config.json.example` to `config.json` and fill out the values:
+Copy or Rename `.env.example` to `.env` and fill out the values:
 
-```json
-{
-    "TOKEN": "TOKEN_HERE",
-    "OWNER_ID": ["OWNER_ID_HERE"],
-    "PREFIX": "#",
-    "EMPTY_LEAVE": 60,
-    "LEAVE_FINISH": true
-}
+```.env
+TOKEN=replace_on_here
+PREFIX=!
+OWNER_ID-replace_on_here
 ```
 
 ## Features & Commands
@@ -71,17 +84,3 @@ Copy or Rename `config.json.example` to `config.json` and fill out the values:
 - Help (#help, #h, #halp, #commands)
 - Invite (#invite)
 - Restart (#restart, #stopbot, #shutdown)
-
-## Picture
-
-- [CLICK ME!](https://imgur.com/a/zvP3NIi)
-
-![see](https://i.imgur.com/03KM8sq.png)
-![see](https://i.imgur.com/lr4whgX.png)
-![see](https://i.imgur.com/Uv1JX4f.png)
-![see](https://i.imgur.com/CqKhn2a.png)
-![see](https://i.imgur.com/sbkZXnb.png)
-![see](https://i.imgur.com/4GGIXyZ.png)
-![see](https://i.imgur.com/poraMNP.png)
-		
-thx for handler [Tomato6966](https://github.com/Tomato6966)

@@ -34,7 +34,7 @@ module.exports = {
             .setColor('#000001')
             .setTitle(`Lyrics`)
             .setDescription(`**${song}**\n${lyrics}`)
-            .setFooter(`Requested by ${message.author.username}`)
+            .setFooter({ text: `Requested by ${message.author.username}`})
             .setTimestamp();
 
         if (lyrics.length > 2048) {

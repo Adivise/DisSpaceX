@@ -1,7 +1,0 @@
-{
-    "TOKEN": "TOKEN_HERE",
-    "OWNER_ID": ["OWNER_ID_HERE"],
-    "PREFIX": "#",
-    "EMPTY_LEAVE": 60,
-    "LEAVE_FINISH": true
-}

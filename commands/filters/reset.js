@@ -21,7 +21,7 @@ module.exports = {
         queue.setVolume(50)
 
         const embed = new MessageEmbed()
-            .setAuthor('Filter has been: Reseted', 'https://cdn.discordapp.com/emojis/758423098885275748.gif')
+            .setAuthor({ name: 'Filter has been: Reseted', iconURL: 'https://cdn.discordapp.com/emojis/758423098885275748.gif'})
             .setColor('#000001');
 
         await delay(3000);

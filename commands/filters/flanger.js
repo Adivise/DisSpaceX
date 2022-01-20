@@ -20,7 +20,7 @@ module.exports = {
         client.distube.setFilter(message, "flanger")
 
         const embed = new MessageEmbed()
-            .setAuthor('Turned on: Flanger', 'https://cdn.discordapp.com/emojis/758423098885275748.gif')
+            .setAuthor({ name: 'Turned on: Flanger', iconURL: 'https://cdn.discordapp.com/emojis/758423098885275748.gif'})
             .setColor('#000001');
 
         await delay(5000);

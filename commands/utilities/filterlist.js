@@ -1,5 +1,4 @@
 const { MessageEmbed } = require("discord.js");
-const { PREFIX } = require("../../config.json");
 
 module.exports = {
     config: {
@@ -14,7 +13,7 @@ module.exports = {
         const msg = await message.channel.send("Processing...");
         const embed = new MessageEmbed()
             .setColor('#000001')
-            .setAuthor(`Filter List`, message.guild.iconURL({ dynamic: true }))
+            .setAuthor({ name: `Filter List`, iconURL: message.guild.iconURL({ dynamic: true })})
             .setDescription(`**Displays all filters that the bot has.**`)
             .setThumbnail(client.user.displayAvatarURL({ dynamic: true, size: 2048 }))
             .addField('** **', `\`3d\``, true)
@@ -32,7 +31,7 @@ module.exports = {
             .addField('** **', `\`phaser\``, true)
             .addField('** **', `\`tremolo\``, true)
             .addField('** **', `\`earwax\``, true)
-            .setFooter(`Example: ${PREFIX}filter bassboost`)
+            .setFooter({ text: `Example: ${client.prefix}filter bassboost`})
             .setTimestamp()
 
             msg.edit({ content: ' ', embeds: [embed] })

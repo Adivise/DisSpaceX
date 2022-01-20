@@ -11,10 +11,10 @@ module.exports = {
     run: async (client, message, args) => {
         const embed = new MessageEmbed()
         .setColor("#000001")
-        .setAuthor("Invite!")
+        .setAuthor({ name: "Invite!"})
         .setDescription("```Invite me to your server!```")
         .setTimestamp()
-        .setFooter(`Requested by ${message.author.tag}`, message.author.displayAvatarURL());
+        .setFooter({ text: `Requested by ${message.author.tag}`, iconURL: message.author.displayAvatarURL()});
 
         const row = new MessageActionRow()
             .addComponents(

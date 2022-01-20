@@ -1,4 +1,4 @@
-const { MessageEmbed } = require("discord.js");
+const { MessageEmbed, Permissions } = require("discord.js");
 
 module.exports = {
     config: {
@@ -10,6 +10,11 @@ module.exports = {
     },
     run: async (client, message, args) => {
         const msg = await message.channel.send("Processing.....");
+
+		const { channel } = message.member.voice;
+		if (!message.guild.me.permissions.has([Permissions.FLAGS.CONNECT, Permissions.FLAGS.SPEAK])) return msg.edit({ embed: { description: "I don't have perm `CONNECT` or `SPEAK` to execute command!", color: "#000001" } });
+        if (!message.guild.me.permissionsIn(channel).has([Permissions.FLAGS.CONNECT, Permissions.FLAGS.SPEAK])) return msg.edit({ embed : { description: `I don't have perm \`CONNECT\` or \`SPEAK\` in ${channel.name} to join voice!`, color: "#000001" } });
+
         const clientVoice = message.guild.me.voice.channel;
         const memberVoice = message.member.voice.channel;
 		

@@ -20,7 +20,7 @@ module.exports = {
         client.distube.setFilter(message, "3d")
 
         const embed = new MessageEmbed()
-            .setAuthor('Turned on: 3d', 'https://cdn.discordapp.com/emojis/758423098885275748.gif')
+            .setAuthor({ text: 'Turned on: 3d', iconURL: 'https://cdn.discordapp.com/emojis/758423098885275748.gif'})
             .setColor('#000001');
 
         await delay(5000);

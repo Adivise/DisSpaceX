@@ -20,7 +20,7 @@ module.exports = {
         client.distube.setFilter(message, "surround")
 
         const embed = new MessageEmbed()
-            .setAuthor('Turned on: Surround', 'https://cdn.discordapp.com/emojis/758423098885275748.gif')
+            .setAuthor({ name: 'Turned on: Surround', iconURL: 'https://cdn.discordapp.com/emojis/758423098885275748.gif'})
             .setColor('#000001');
 
         await delay(5000);

@@ -20,7 +20,7 @@ module.exports = {
         const part = Math.floor((queue.currentTime / queue.songs[0].duration) * 30);
 
         const embed = new MessageEmbed()
-            .setAuthor(queue.songs[0].playing ? 'Song Pause...' : 'Now Playing...', "https://cdn.discordapp.com/emojis/741605543046807626.gif")
+            .setAuthor({ name: queue.songs[0].playing ? 'Song Pause...' : 'Now Playing...', iconURL: "https://cdn.discordapp.com/emojis/741605543046807626.gif"})
             .setColor('#000001')
             .setDescription(`**[${queue.songs[0].name}](${queue.songs[0].url})**`)
             .setThumbnail(`${queue.songs[0].thumbnail}`)

@@ -20,7 +20,7 @@ module.exports = {
         client.distube.setFilter(message, "reverse")
 
         const embed = new MessageEmbed()
-            .setAuthor('Turned on: Reverse', 'https://cdn.discordapp.com/emojis/758423098885275748.gif')
+            .setAuthor({ name: 'Turned on: Reverse', iconURL: 'https://cdn.discordapp.com/emojis/758423098885275748.gif'})
             .setColor('#000001');
 
         await delay(5000);

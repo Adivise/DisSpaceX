@@ -19,7 +19,7 @@ module.exports = {
 		if (queue.paused) { 
 			const embed = new MessageEmbed()
 				.setColor("#000001")
-				.setDescription(`\`⏯\` | **Queue has been:** \`Paused\``);
+				.setDescription(`\`⏯\` | **Song has been:** \`Paused\``);
 
 			msg.edit({ content: ' ', embeds: [embed] });
 		} else {

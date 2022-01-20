@@ -20,7 +20,7 @@ module.exports = {
         client.distube.setFilter(message, "haas")
 
         const embed = new MessageEmbed()
-            .setAuthor('Turned on: Haas', 'https://cdn.discordapp.com/emojis/758423098885275748.gif')
+            .setAuthor({ name: 'Turned on: Haas', iconURL: 'https://cdn.discordapp.com/emojis/758423098885275748.gif'})
             .setColor('#000001');
 
         await delay(5000);

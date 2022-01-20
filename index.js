@@ -2,7 +2,6 @@ const { Intents, Client, Collection } = require("discord.js");
 const { DisTube } = require('distube');
 const { SoundCloudPlugin } = require('@distube/soundcloud');
 const { SpotifyPlugin } = require('@distube/spotify');
-const { TOKEN, EMPTY_LEAVE, LEAVE_FINISH } = require('./config.json');
 
 const client = new Client({
     shards: "auto",
@@ -22,13 +21,17 @@ const client = new Client({
 process.on('unhandledRejection', error => console.log(error));
 process.on('uncaughtException', error => console.log(error));
 
+client.config = require('./settings/config.js');
+client.prefix = client.config.PREFIX;
+client.owner = client.config.OWNER_ID;
+
 client.distube = new DisTube(client, {
   searchSongs: 0,
   searchCooldown: 30,
-  leaveOnEmpty: true,
-  emptyCooldown: EMPTY_LEAVE,
-  leaveOnFinish: LEAVE_FINISH,
-  leaveOnStop: true,
+  leaveOnEmpty: client.config.LEAVE_EMPTY,
+  emptyCooldown: client.config.EMPTY_LEAVE,
+  leaveOnFinish: client.config.LEAVE_FINISH,
+  leaveOnStop: client.config.LEAVE_STOP,
   plugins: [new SoundCloudPlugin(), new SpotifyPlugin()],
   ytdlOptions: {
     highWaterMark: 1 << 24,
@@ -40,4 +43,4 @@ client.distube = new DisTube(client, {
 ["loadCommands", "loadEvents", "loadDistube"].forEach(x => require(`./handlers/${x}`)(client));
 
 
-client.login(TOKEN)
+client.login(client.config.TOKEN);

@@ -1,5 +1,5 @@
 const { MessageEmbed } = require("discord.js");
-const pagequeue = require('../../handlers/pagequeue.js');
+const pagequeue = require('../../structures/pagequeue.js');
 
 module.exports = {
     config: {
@@ -32,16 +32,16 @@ module.exports = {
 		for (let i = 0; i < pagesNum; i++) {
 			const str = songStrings.slice(i * 10, i * 10 + 10).join('');
 			const embed = new MessageEmbed()
-                .setAuthor(`Queue - ${message.guild.name}`, message.guild.iconURL({ dynamic: true }))
+                .setAuthor({ name: `Queue - ${message.guild.name}`, iconURL: message.guild.iconURL({ dynamic: true })})
                 .setThumbnail(queue.songs[0].thumbnail)
 				.setColor('#000001')
-				.setDescription(`**Currently Playing**\n [${queue.songs[0].name}](${queue.songs[0].url}) \`[${queue.songs[0].formattedDuration}]\` • ${queue.songs[0].user}\n\n**Rest of queue**${str == '' ? '  Nothing' : '\n' + str }`)
-				.setFooter(`Page • ${i + 1}/${pagesNum} | ${queue.songs.length} • Songs | ${queue.formattedDuration} • Total duration`);
+				.setDescription(`**Currently Playing:**\n**[${queue.songs[0].name}](${queue.songs[0].url})** \`[${queue.songs[0].formattedDuration}]\` • ${queue.songs[0].user}\n\n**Rest of queue**${str == '' ? '  Nothing' : '\n' + str }`)
+				.setFooter({ text: `Page • ${i + 1}/${pagesNum} | ${queue.songs.length} • Songs | ${queue.formattedDuration} • Total duration`});
 			pages.push(embed);
 		}
 
 		if (!args[0]) {
-			if (pages.length == pagesNum && queue.songs.length > 10) pagequeue(client, message, pages, ['⏮', '⏭'], 120000, queue.songs.length, qduration);
+			if (pages.length == pagesNum && queue.songs.length > 10) pagequeue(client, message, pages, 60000, queue.songs.length, qduration);
 			else return message.channel.send({ embeds: [pages[0]] });
 		}
 		else {

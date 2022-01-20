@@ -1,5 +1,4 @@
 const { MessageEmbed } = require('discord.js');
-const { prefix } = require('../../config.json');
 const delay = require('delay');
 
 module.exports = {
@@ -23,9 +22,9 @@ module.exports = {
         else if (args[0]) msg.edit(`Invalid filter!`)
 
         const embed = new MessageEmbed()
-            .setAuthor(`Currently Filter`, `https://cdn.discordapp.com/emojis/741605543046807626.gif`)
+            .setAuthor({ name: `Currently Filter`, iconURL: `https://cdn.discordapp.com/emojis/741605543046807626.gif`})
             .setDescription(`\🎲 **Filter:** \`${queue.filters.join(", ") || "Normal"}\``)
-            .setFooter(`🔩 **Example:** \`${prefix}filter 3d\``)
+            .setFooter({ text: `🔩 **Example:** \`${client.prefix}filter 3d\``})
             .setTimestamp()
             .setColor('#000001');
 
