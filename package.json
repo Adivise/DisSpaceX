@@ -9,6 +9,7 @@
   "author": "Adivise",
   "license": "MIT",
   "dependencies": {
+	"@discordjs/voice": "^0.7.5",
     "@distube/soundcloud": "^1.0.0",
     "@distube/spotify": "^1.0.0",
     "chalk": "^4.1.2",
