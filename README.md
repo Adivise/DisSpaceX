@@ -84,8 +84,6 @@ OWNER_ID-replace_on_here
 - Help (#help, #h, #halp, #commands)
 - Invite (#invite)
 - Restart (#restart, #stopbot, #shutdown)
-<<<<<<< HEAD
-=======
 
 ## 🖼 Picture
 
