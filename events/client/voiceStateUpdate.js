@@ -27,16 +27,8 @@ module.exports = async (client, oldState, newState) => {
   if (newState.serverMute == false && oldState.serverMute == true)
     return client.distube.resume(guildId);
 
-  if (stateChange.type === "MOVE") {
-    if (oldState.channel.id === queue.voiceChannel) stateChange.type = "LEAVE";
-    if (newState.channel.id === queue.voiceChannel) stateChange.type = "JOIN";
-  }
-
   if (stateChange.type === "JOIN") stateChange.channel = newState.channel;
   if (stateChange.type === "LEAVE") stateChange.channel = oldState.channel;
-
-  //if (!stateChange.channel || stateChange.channel.id !== queue.voiceChannel)
-   // return;
 
   stateChange.members = stateChange.channel.members.filter(
     (member) => !member.user.bot
