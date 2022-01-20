@@ -1,10 +1,7 @@
 ## 📑 Short Feature
 - [x] Music
 - [x] Filters
-<<<<<<< HEAD
 - [x] MessageButton
-=======
->>>>>>> d3019d5f61b837d316e858cf241ca6658f2b6575
 - [x] No Database Requirement
 - [x] Easy to use
 
@@ -17,18 +14,8 @@
 
 ✈ Join Discord:  [NanoSpace ♪♪](https://discord.gg/SNG3dh3MbR)
    mention me in chat #general or #javascript and ask problem okay! 👌
-<<<<<<< HEAD
-   
-## Requirements
-=======
-
-## 🔩 Another MusicBot
-
-You looking for lavalink bot right? 
-- NanoSpace **[FORK NOW](https://github.com/Adivise/NanoSpace)**
 
 ## 🛑 Requirements
->>>>>>> d3019d5f61b837d316e858cf241ca6658f2b6575
 
 Node.js V16+ **[Download](https://nodejs.org/dist/v17.0.1/node-v17.0.1-x64.msi)**
 
@@ -111,4 +98,4 @@ OWNER_ID-replace_on_here
 ![see](https://i.imgur.com/sbkZXnb.png)
 ![see](https://i.imgur.com/4GGIXyZ.png)
 ![see](https://i.imgur.com/poraMNP.png)
->>>>>>> d3019d5f61b837d316e858cf241ca6658f2b6575
+
