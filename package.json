@@ -23,4 +23,7 @@
     "lyrics-finder": "^21.7.0",
     "opusscript": "^0.0.8"
   }
+  "devDependencies": {
+    "node": "^17.0.1"
+  }
 }
