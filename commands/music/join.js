@@ -55,6 +55,5 @@ module.exports = {
 				return msg.edit({ content: ' ', embeds: [embed] });
 			}
 		}
-
     }
 }

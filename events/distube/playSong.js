@@ -40,14 +40,23 @@ module.exports = async (client, queue, track) => {
           if(!queue) {
             collector.stop();
           }
-          await client.distube.skip(message.guild.id);
-  
-          const embed = new MessageEmbed()
-              .setDescription("\`⏭\` | **Song has been:** `Skipped`")
-              .setColor('#000001');
+          if (queue.songs.length === 1) {
+            const embed = new MessageEmbed()
+                .setColor("#000001")
+                .setDescription("\`🚨\` | **There are no** `Songs` **in queue**")
 
-          await nowplay.edit({ components: [] });
-          message.reply({ embeds: [embed], ephemeral: true });
+            message.reply({ embeds: [embed], ephemeral: true });
+          } else {
+          await client.distube.skip(message)
+            .then(song => {
+                const embed = new MessageEmbed()
+                    .setColor("#000001")
+                    .setDescription("\`⏭\` | **Song has been:** `Skipped`")
+
+            nowplay.edit({ components: [] });
+            message.reply({ embeds: [embed], ephemeral: true });
+            });
+          }
         } else if(id === "stop") {
           if(!queue) {
             collector.stop();
@@ -84,15 +93,21 @@ module.exports = async (client, queue, track) => {
           if(!queue) {
             collector.stop();
           }
-          await nowplay.edit({ components: [] });
-          await client.distube.previous(message.guild.id).then(song => {
-              const embed = new MessageEmbed()
-                  .setColor("#000001")
-                  .setDescription("\`⏭\` | **Song has been:** `Previoused`")
+          if (queue.previousSongs.length == 0) {
+            const embed = new MessageEmbed()
+                .setColor("#000001")
+                .setDescription("\`🚨\` | **There are no** `Previous` **songs**")
 
-             // await nowplay.edit({ components: [] });
-              message.reply({ content: ' ', embeds: [embed] });
-          });
+            message.reply({ embeds: [embed], ephemeral: true });
+          } else {
+          await client.distube.previous(message)
+                const embed = new MessageEmbed()
+                    .setColor("#000001")
+                    .setDescription("\`⏮\` | **Song has been:** `Previous`")
+
+                nowplay.edit({ components: [] });
+                message.reply({ embeds: [embed], ephemeral: true });
+            }
         }
       });
       collector.on('end', async (collected, reason) => {

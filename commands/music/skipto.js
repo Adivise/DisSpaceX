@@ -24,7 +24,7 @@ module.exports = {
             return msg.edit({ content: ' ', embeds: [embed] });
         }
 
-        message.client.distube.jump(message, parseInt(args[0]))
+        await client.distube.jump(message, parseInt(args[0]))
             .then(queue => {
                 const embed = new MessageEmbed()
                     .setColor("#000001")

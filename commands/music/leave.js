@@ -16,7 +16,6 @@ module.exports = {
         const memberVoice = message.member.voice.channel;
 
         if (clientVoice === memberVoice) {
-            
             if (queue) {
                 client.distube.stop(message);
                 client.distube.voices.leave(message.guild);
@@ -25,7 +24,7 @@ module.exports = {
             }
 
             const embed = new MessageEmbed()
-                .setDescription(`\`🚫\` | **Leaved:** | \`${memberVoice.name}\``)
+                .setDescription(`\`🚫\` | **Left:** | \`${memberVoice.name}\``)
                 .setColor('#000001')
 
             msg.edit({ content: ' ', embeds : [embed] });

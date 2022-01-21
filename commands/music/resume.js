@@ -17,7 +17,7 @@ module.exports = {
         if (!channel || message.member.voice.channel !== message.guild.me.voice.channel) return msg.edit("You need to be in a same/voice channel.")
 		
 		if (queue.paused) { 
-			client.distube.resume(message);
+			await client.distube.resume(message);
 
 			const embed = new MessageEmbed()
 				.setColor("#000001")

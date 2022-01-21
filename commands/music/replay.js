@@ -1,10 +1,10 @@
-const { MessageEmbed } = require('discord.js');
+const { MessageEmbed } = require("discord.js");
 
-module.exports = { 
+module.exports = {
     config: {
-        name: "shuffle",
-        aliases: ["mix"],
-        description: "Shuffles the current queue.",
+        name: "replay",
+        aliases: [],
+        description: "Replays the current song.",
         accessableby: "Member",
         category: "music",
     },
@@ -16,12 +16,13 @@ module.exports = {
         const { channel } = message.member.voice;
         if (!channel || message.member.voice.channel !== message.guild.me.voice.channel) return msg.edit("You need to be in a same/voice channel.")
 
-            await client.distube.shuffle(message);
+        await queue.seek(0)
 
-			let embed = new MessageEmbed()
-				.setColor('#000001')
-				.setDescription(`\`🔀\` | **Song has been:** \`Shuffle\``);
+        const embed = new MessageEmbed()
+            .setColor("#000001")
+            .setDescription("\`🔁\` | **Song has been:** `Replay`")
 
-			msg.edit({ content: ' ', embeds: [embed] });
+        msg.edit({ content: ' ', embeds: [embed] });
+        
     }
-};
+}

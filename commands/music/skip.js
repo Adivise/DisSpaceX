@@ -17,16 +17,13 @@ module.exports = {
         if (!channel || message.member.voice.channel !== message.guild.me.voice.channel) return msg.edit("You need to be in a same/voice channel.")
 
         if (queue.songs.length === 1) {
-            message.client.distube.stop(message)
-                .then(song => {
-                    const embed = new MessageEmbed()
-                        .setColor("#000001")
-                        .setDescription("\`⏭\` | **Song has been:** `Skipped`")
+                const embed = new MessageEmbed()
+                    .setColor("#000001")
+                    .setDescription("\`🚨\` | **There are no** `Songs` **in queue**")
 
-                    msg.edit({ content: ' ', embeds: [embed] });
-                });
+                msg.edit({ content: ' ', embeds: [embed] });
         } else {
-            message.client.distube.skip(message)
+            client.distube.skip(message)
                 .then(song => {
                     const embed = new MessageEmbed()
                         .setColor("#000001")

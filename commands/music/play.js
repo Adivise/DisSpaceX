@@ -15,20 +15,21 @@ module.exports = {
         })
         
         const { channel } = message.member.voice;
-        if (!channel) return message.channel.send("You need to be in a same/voice channel.")
+        if (!channel) return message.channel.send("You need to be in voice channel.")
         if (!message.guild.me.permissions.has([Permissions.FLAGS.CONNECT, Permissions.FLAGS.SPEAK])) return msg.edit({ embed: { description: "I don't have perm `CONNECT` or `SPEAK` to execute command!", color: "#000001" } });
         if (!message.guild.me.permissionsIn(channel).has([Permissions.FLAGS.CONNECT, Permissions.FLAGS.SPEAK])) return msg.edit({ embed : { description: `I don't have perm \`CONNECT\` or \`SPEAK\` in ${channel.name} to join voice!`, color: "#000001" } });
-
 
         const string = args.join(" ");
         if (!string) {
             return message.channel.send("Please provide a song name or link.");
         }
 
-        await client.distube.play(message.member.voice.channel, string, {
+        const options = {
             member: message.member,
             textChannel: message.channel,
             message
-        })
+        }
+
+        await client.distube.play(message.member.voice.channel, string, options);
     }
 }
