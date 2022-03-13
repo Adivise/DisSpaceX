@@ -2,8 +2,7 @@ const { Permissions } = require("discord.js");
 
 module.exports = {
     config: {
-        name: "play",
-        aliases: ["pplay", "p"],
+        name: "playskip",
         description: "Plays a song from the source.",
         accessableby: "Member",
         category: "music",
@@ -26,7 +25,8 @@ module.exports = {
         const options = {
             member: message.member,
             textChannel: message.channel,
-            message
+            message,
+            skip: true
         }
 
         await client.distube.play(message.member.voice.channel, string, options);
