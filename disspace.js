@@ -2,7 +2,6 @@ const { Intents, Client, Collection } = require("discord.js");
 const { DisTube } = require('distube');
 const { SoundCloudPlugin } = require('@distube/soundcloud');
 const { SpotifyPlugin } = require('@distube/spotify');
-const { YtDlpPlugin } = require('@distube/yt-dlp')
 
 class MainClient extends Client {
     constructor() {
@@ -41,13 +40,7 @@ this.distube = new DisTube(client, {
   new SoundCloudPlugin(), 
   new SpotifyPlugin({
       emitEventsAfterFetching: true
-    }), 
-	new YtDlpPlugin()],
-  youtubeDL: false
-  ytdlOptions: {
-    highWaterMark: 1 << 24,
-    quality: 'highestaudio'
-  },
+    })],
 });
 
 ["aliases", "commands"].forEach(x => client[x] = new Collection());
