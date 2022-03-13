@@ -2,6 +2,7 @@ const { Intents, Client, Collection } = require("discord.js");
 const { DisTube } = require('distube');
 const { SoundCloudPlugin } = require('@distube/soundcloud');
 const { SpotifyPlugin } = require('@distube/spotify');
+const { YtDlpPlugin } = require('@distube/yt-dlp')
 
 class MainClient extends Client {
     constructor() {
@@ -15,8 +16,7 @@ class MainClient extends Client {
             Intents.FLAGS.GUILDS,
             Intents.FLAGS.GUILD_MEMBERS,
             Intents.FLAGS.GUILD_VOICE_STATES,
-            Intents.FLAGS.GUILD_MESSAGES,
-            Intents.FLAGS.GUILD_MESSAGE_REACTIONS,
+            Intents.FLAGS.GUILD_MESSAGES
         ],
     });
 
@@ -37,7 +37,13 @@ this.distube = new DisTube(client, {
   emptyCooldown: this.config.EMPTY_LEAVE,
   leaveOnFinish: this.config.LEAVE_FINISH,
   leaveOnStop: this.config.LEAVE_STOP,
-  plugins: [new SoundCloudPlugin(), new SpotifyPlugin()],
+  plugins: [
+  new SoundCloudPlugin(), 
+  new SpotifyPlugin({
+      emitEventsAfterFetching: true
+    }), 
+	new YtDlpPlugin()],
+  youtubeDL: false
   ytdlOptions: {
     highWaterMark: 1 << 24,
     quality: 'highestaudio'
@@ -46,7 +52,6 @@ this.distube = new DisTube(client, {
 
 ["aliases", "commands"].forEach(x => client[x] = new Collection());
 ["loadCommands", "loadEvents", "loadDistube"].forEach(x => require(`./handlers/${x}`)(client));
-
 
     }
         connect() {
