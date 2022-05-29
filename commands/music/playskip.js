@@ -8,9 +8,9 @@ module.exports = {
         category: "music",
     },
     run: async (client, message, args) => {
-        message.channel.send(`**Searching.....** \`${args.join(" ")}\``).then(msg => {
-            setTimeout(() => msg.delete(), 5000)
-        })
+      //  message.channel.send(`**Searching.....** \`${args.join(" ")}\``).then(msg => {
+      //      setTimeout(() => msg.delete(), 5000)
+      //  })
         
         const { channel } = message.member.voice;
         if (!channel) return message.channel.send("You need to be in voice channel.")

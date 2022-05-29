@@ -1,4 +1,4 @@
-const { Intents, Client, Collection } = require("discord.js");
+const { Client, Collection } = require("discord.js");
 const { DisTube } = require('distube');
 const { SoundCloudPlugin } = require('@distube/soundcloud');
 const { SpotifyPlugin } = require('@distube/spotify');
@@ -7,16 +7,11 @@ class MainClient extends Client {
     constructor() {
        super({
             shards: "auto",
+            intents: 32767,
             allowedMentions: {
             parse: ["roles", "users", "everyone"],
             repliedUser: false
         },
-        intents: [ 
-            Intents.FLAGS.GUILDS,
-            Intents.FLAGS.GUILD_MEMBERS,
-            Intents.FLAGS.GUILD_VOICE_STATES,
-            Intents.FLAGS.GUILD_MESSAGES
-        ],
     });
 
 process.on('unhandledRejection', error => console.log(error));
@@ -30,12 +25,13 @@ if(!this.token) this.token = this.config.TOKEN;
 const client = this;
 
 this.distube = new DisTube(client, {
-  searchSongs: 0,
+  searchSongs: 0, /// SET TO 5 FOR ENABLE SEARCH MODE!
   searchCooldown: 30,
-  leaveOnEmpty: this.config.LEAVE_EMPTY,
-  emptyCooldown: this.config.EMPTY_LEAVE,
-  leaveOnFinish: this.config.LEAVE_FINISH,
-  leaveOnStop: this.config.LEAVE_STOP,
+  leaveOnEmpty: true,
+  emptyCooldown: 60,
+  leaveOnFinish: true,
+  leaveOnStop: true,
+  youtubeDL: false,
   plugins: [
   new SoundCloudPlugin(), 
   new SpotifyPlugin({

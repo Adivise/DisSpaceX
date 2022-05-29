@@ -1,11 +1,8 @@
-## 🤖 FORK
-[![Run on Repl.it](https://repl.it/badge/github/Adivise/DisSpaceX)](https://repl.it/github/Adivise/DisSpaceX)
-
 ## 📑 Short Feature
 - [x] Music
 - [x] Filters
 - [x] MessageButton
-- [x] No Database Requirement
+- [x] No Database
 - [x] Easy to use
 
 ## 🎶 Support Source
@@ -20,11 +17,9 @@
 
 ## 🛑 Requirements
 
-Node.js V16+ **[Download](https://nodejs.org/dist/v17.0.1/node-v17.0.1-x64.msi)**
+Node.js **[Download](https://nodejs.org/dist/v17.0.1/node-v17.0.1-x64.msi)**
 
 Discord Bot Token **[Guide](https://discordjs.guide/preparations/setting-up-a-bot-application.html#creating-your-bot)**
-
-FFmpeg **[Download](https://github.com/BtbN/FFmpeg-Builds)**
 
 ## 💌 Installation
 
@@ -42,7 +37,7 @@ Copy or Rename `.env.example` to `.env` and fill out the values:
 ```.env
 TOKEN=replace_on_here
 PREFIX=!
-OWNER_ID-replace_on_here
+OWNER_ID=replace_on_here
 ```
 
 ## 📄 Features & Commands
@@ -50,9 +45,14 @@ OWNER_ID-replace_on_here
 > Note: The default prefix is '#'
 
 🎶 **Music Commands!** 
-- Play (#play, #p, #pplay) can play song from youtube, soundcloud and spotify
+- Play (#play, #p, #pplay)
+- Autoplay (#autoplay, #ap)
+- Lyrics (#lyrics)
+- Playskip (#playskip)
+- Replay (#replay)
+- Previous (#previous)
 - Nowplaying (#nowplaying, #np)
-- Queue (#queue <page>, #q <page>)
+- Queue (#queue, #q)
 - Loop (#loop, #l)
 - Loopqueue (#loopqueue, #lq)
 - Shuffle (#shuffle)
@@ -68,7 +68,7 @@ OWNER_ID-replace_on_here
 - Vaporwave (#vaporwave, #vw)
 - earwax (#earwax)
 - Nightcore (#nightcore, nc)
-- 3d (#3d) <== use head phone for this feeling
+- 3d (#3d)
 - echo (#echo)
 - flanger (#flanger, #fg)
 - gate (#gate)
@@ -88,7 +88,7 @@ OWNER_ID-replace_on_here
 - Invite (#invite)
 - Restart (#restart, #stopbot, #shutdown)
 
-## 🖼 Picture
+## 🖼 Picture (OLD)
 
 - [CLICK ME!](https://imgur.com/a/zvP3NIi)
 
@@ -99,4 +99,3 @@ OWNER_ID-replace_on_here
 ![see](https://i.imgur.com/sbkZXnb.png)
 ![see](https://i.imgur.com/4GGIXyZ.png)
 ![see](https://i.imgur.com/poraMNP.png)
-

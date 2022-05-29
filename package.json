@@ -1,6 +1,6 @@
 {
   "name": "disspacex",
-  "version": "3.7.1",
+  "version": "3.7.3",
   "description": "✈ Join Discord: https://discord.gg/SNG3dh3MbR",
   "main": "index.js",
   "scripts": {
@@ -16,7 +16,7 @@
     "common-tags": "^1.8.2",
     "delay": "^5.0.0",
     "discord.js": "^13.6.0",
-    "distube": "^3.3.2",
+    "distube": "^3.3.4",
     "dotenv": "^14.3.2",
     "ffmpeg-static": "^4.4.1",
     "figlet": "^1.5.2",
