@@ -29,7 +29,6 @@ module.exports = {
             .addField('Volume:', `${queue.volume}%`, true)
             .addField('Views', `${queue.songs[0].views}`, true)
             .addField('Likes:', `${queue.songs[0].likes}`, true)
-            .addField('Dislikes:', `${queue.songs[0].dislikes}`, true)
             .addField(`Current Duration: \`[${queue.formattedCurrentTime} / ${queue.songs[0].formattedDuration}]\``, `\`\`\`${uni} ${'─'.repeat(part) + '🎶' + '─'.repeat(30 - part)}\`\`\``)
             .setTimestamp()
 

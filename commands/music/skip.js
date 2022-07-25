@@ -16,7 +16,7 @@ module.exports = {
         const { channel } = message.member.voice;
         if (!channel || message.member.voice.channel !== message.guild.me.voice.channel) return msg.edit("You need to be in a same/voice channel.")
 
-        if (queue.songs.length === 1) {
+        if (queue.songs.length === 1 && queue.autoplay === false) {
                 const embed = new MessageEmbed()
                     .setColor("#000001")
                     .setDescription("\`🚨\` | **There are no** `Songs` **in queue**")
