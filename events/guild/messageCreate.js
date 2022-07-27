@@ -22,7 +22,6 @@ module.exports = async (client, message) => {
     if(!command) return;
     
     if(!message.guild.me.permissions.has(Permissions.FLAGS.SEND_MESSAGES)) return await message.author.dmChannel.send({ content: `I don't have perm  **\`SEND_MESSAGES\`** permission in <#${message.channelId}> to execute command!` }).catch(() => {});
-    if(!message.guild.me.permissions.has(Permissions.FLAGS.VIEW_CHANNEL)) return;
     if(!message.guild.me.permissions.has(Permissions.FLAGS.EMBED_LINKS)) return await message.channel.send({ content: `I don't have perm **\`EMBED_LINKS\`** to execute command!` }).catch(() => {});
     
     try {
