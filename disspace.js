@@ -2,8 +2,6 @@ const { Client, Collection } = require("discord.js");
 const { DisTube } = require('distube');
 const { SoundCloudPlugin } = require('@distube/soundcloud');
 const { SpotifyPlugin } = require('@distube/spotify');
-const { YtDlpPlugin } = require("@distube/yt-dlp");
-
 
 class MainClient extends Client {
     constructor() {
@@ -39,7 +37,7 @@ class MainClient extends Client {
                 new SpotifyPlugin({
                     emitEventsAfterFetching: true
                 }),
-                new YtDlpPlugin()],
+            ],
         });
 
         ["aliases", "commands"].forEach(x => client[x] = new Collection());
