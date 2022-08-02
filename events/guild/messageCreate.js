@@ -1,4 +1,4 @@
-const { Permissions, MessageEmbed } = require("discord.js");
+const { PermissionsBitField, EmbedBuilder } = require("discord.js");
 
 module.exports = async (client, message) => { 
     if(message.author.bot || message.channel.type === "dm") return;
@@ -7,7 +7,7 @@ module.exports = async (client, message) => {
 
     const mention = new RegExp(`^<@!?${client.user.id}>( |)$`);
     if (message.content.match(mention)) {
-      const embed = new MessageEmbed()
+      const embed = new EmbedBuilder()
         .setColor("#000001")
         .setDescription(`**My prefix is: \`${PREFIX}\`**`);
       message.channel.send({ embeds: [embed] })
@@ -21,14 +21,16 @@ module.exports = async (client, message) => {
     const command = client.commands.get(cmd) || client.commands.get(client.aliases.get(cmd));
     if(!command) return;
     
-    if(!message.guild.me.permissions.has(Permissions.FLAGS.SEND_MESSAGES)) return await message.author.dmChannel.send({ content: `I don't have perm  **\`SEND_MESSAGES\`** permission in <#${message.channelId}> to execute command!` }).catch(() => {});
-    if(!message.guild.me.permissions.has(Permissions.FLAGS.EMBED_LINKS)) return await message.channel.send({ content: `I don't have perm **\`EMBED_LINKS\`** to execute command!` }).catch(() => {});
+    if(!message.guild.members.me.permissions.has(PermissionsBitField.Flags.SendMessages)) return await message.author.dmChannel.send({ content: `I don't have perm  **\`SEND_MESSAGES\`** permission in <#${message.channelId}> to execute command!` }).catch(() => {});
+    if(!message.guild.members.me.permissions.has(PermissionsBitField.Flags.EmbedLinks)) return await message.channel.send({ content: `I don't have perm **\`EMBED_LINKS\`** to execute command!` }).catch(() => {});
     
+    console.log(`[COMMAND] ${command.config.name} executed by ${message.author.tag}`);
+
     try {
         command.run(client, message, args);
     } catch (error) {
         console.log(error);
-        const embed = new MessageEmbed()
+        const embed = new EmbedBuilder()
             .setColor("#000001")
             .setDescription("There was an error executing that command.");
 

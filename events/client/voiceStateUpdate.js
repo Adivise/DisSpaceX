@@ -14,9 +14,9 @@ module.exports = async (client, oldState, newState) => {
         (oldState.selfVideo && !newState.selfVideo) 
      )
     if (!oldState.channelId && newState.channelId) {
-        if(newState.channel.type == "GUILD_STAGE_VOICE" && newState.guild.me.voice.suppress){
+        if(newState.channel.type == "GUILD_STAGE_VOICE" && newState.guild.members.me.voice.suppress){
           try{
-            await newState.guild.me.voice.setSuppressed(false);
+            await newState.guild.members.me.voice.setSuppressed(false);
           }catch (e){
             console.log(String(e).grey)
           }
@@ -27,9 +27,9 @@ module.exports = async (client, oldState, newState) => {
         return
     }
     if (oldState.channelId && newState.channelId) {
-        if(newState.channel.type == "GUILD_STAGE_VOICE" && newState.guild.me.voice.suppress){
+        if(newState.channel.type == "GUILD_STAGE_VOICE" && newState.guild.members.me.voice.suppress){
           try{
-            await newState.guild.me.voice.setSuppressed(false);
+            await newState.guild.members.me.voice.setSuppressed(false);
           }catch (e){
             console.log(String(e).grey)
           }

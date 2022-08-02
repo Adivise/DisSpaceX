@@ -1,4 +1,4 @@
-const { Client, Collection } = require("discord.js");
+const { Client, Collection, GatewayIntentBits } = require("discord.js");
 const { DisTube } = require('distube');
 const { SoundCloudPlugin } = require('@distube/soundcloud');
 const { SpotifyPlugin } = require('@distube/spotify');
@@ -9,7 +9,13 @@ class MainClient extends Client {
     constructor() {
         super({
             shards: "auto",
-            intents: 32767,
+            intents: [
+                GatewayIntentBits.Guilds,
+                GatewayIntentBits.GuildMembers,
+                GatewayIntentBits.GuildMessages,
+                GatewayIntentBits.GuildVoiceStates,
+                GatewayIntentBits.MessageContent,
+            ],
             allowedMentions: {
                 parse: ["roles", "users", "everyone"],
                 repliedUser: false
@@ -33,7 +39,6 @@ class MainClient extends Client {
             emptyCooldown: 60,
             leaveOnFinish: true,
             leaveOnStop: true,
-            youtubeDL: false,
             plugins: [
                 new SoundCloudPlugin(),
                 new SpotifyPlugin({

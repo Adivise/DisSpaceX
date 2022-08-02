@@ -1,4 +1,4 @@
-const { MessageEmbed, MessageActionRow, MessageButton } = require("discord.js");
+const { EmbedBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle } = require("discord.js");
 
 module.exports = async (client, queue, track) => {
   var newQueue = client.distube.getQueue(queue.id)
@@ -7,7 +7,7 @@ module.exports = async (client, queue, track) => {
   const nowplay = await queue.textChannel.send(data)
 
   const filter = (message) => {
-    if (message.guild.me.voice.channel && message.guild.me.voice.channelId === message.member.voice.channelId) return true;
+    if (message.guild.members.me.voice.channel && message.guild.members.me.voice.channelId === message.member.voice.channelId) return true;
     else {
       message.reply({ content: "You need to be in a same/voice channel.", ephemeral: true });
     }
@@ -23,14 +23,14 @@ module.exports = async (client, queue, track) => {
       }
       if (queue.paused) {
         await client.distube.resume(message.guild.id);
-        const embed = new MessageEmbed()
+        const embed = new EmbedBuilder()
           .setColor("#000001")
           .setDescription(`\`⏯\` | **Song has been:** \`Resumed\``);
 
         message.reply({ embeds: [embed], ephemeral: true });
       } else {
         await client.distube.pause(message.guild.id);
-        const embed = new MessageEmbed()
+        const embed = new EmbedBuilder()
           .setColor("#000001")
           .setDescription(`\`⏯\` | **Song has been:** \`Paused\``);
 
@@ -41,7 +41,7 @@ module.exports = async (client, queue, track) => {
         collector.stop();
       }
       if (queue.songs.length === 1 && queue.autoplay === false) {
-        const embed = new MessageEmbed()
+        const embed = new EmbedBuilder()
           .setColor("#000001")
           .setDescription("\`🚨\` | **There are no** `Songs` **in queue**")
 
@@ -49,7 +49,7 @@ module.exports = async (client, queue, track) => {
       } else {
         await client.distube.skip(message)
           .then(song => {
-            const embed = new MessageEmbed()
+            const embed = new EmbedBuilder()
               .setColor("#000001")
               .setDescription("\`⏭\` | **Song has been:** `Skipped`")
 
@@ -64,7 +64,7 @@ module.exports = async (client, queue, track) => {
 
       await client.distube.stop(message.guild.id);
 
-      const embed = new MessageEmbed()
+      const embed = new EmbedBuilder()
         .setDescription(`\`🚫\` | **Song has been:** | \`Stopped\``)
         .setColor('#000001');
 
@@ -76,14 +76,14 @@ module.exports = async (client, queue, track) => {
       }
       if (queue.repeatMode === 0) {
         client.distube.setRepeatMode(message.guild.id, 1);
-        const embed = new MessageEmbed()
+        const embed = new EmbedBuilder()
           .setColor("#000001")
           .setDescription(`\`🔁\` | **Song is loop:** \`Current\``)
 
         message.reply({ embeds: [embed], ephemeral: true });
       } else {
         client.distube.setRepeatMode(message.guild.id, 0);
-        const embed = new MessageEmbed()
+        const embed = new EmbedBuilder()
           .setColor("#000001")
           .setDescription(`\`🔁\` | **Song is unloop:** \`Current\``)
 
@@ -94,14 +94,14 @@ module.exports = async (client, queue, track) => {
         collector.stop();
       }
       if (queue.previousSongs.length == 0) {
-        const embed = new MessageEmbed()
+        const embed = new EmbedBuilder()
           .setColor("#000001")
           .setDescription("\`🚨\` | **There are no** `Previous` **songs**")
 
         message.reply({ embeds: [embed], ephemeral: true });
       } else {
         await client.distube.previous(message)
-        const embed = new MessageEmbed()
+        const embed = new EmbedBuilder()
           .setColor("#000001")
           .setDescription("\`⏮\` | **Song has been:** `Previous`")
 
@@ -118,55 +118,55 @@ module.exports = async (client, queue, track) => {
 }
 
 function disspace(nowQueue, nowTrack) {
-  const embeded = new MessageEmbed()
+  const embeded = new EmbedBuilder()
     .setAuthor({ name: `Starting Playing...`, iconURL: 'https://cdn.discordapp.com/emojis/741605543046807626.gif' })
     .setThumbnail(nowTrack.thumbnail)
     .setColor('#000001')
     .setDescription(`**[${nowTrack.name}](${nowTrack.url})**`)
-    .addField(`Uploader:`, `**[${nowTrack.uploader.name}](${nowTrack.uploader.url})**`, true)
-    .addField(`Requester:`, `${nowTrack.user}`, true)
-    .addField(`Current Volume:`, `${nowQueue.volume}%`, true)
-    .addField(`Filters:`, `${nowQueue.filters.join(", ") || "Normal"}`, true)
-    .addField(`Autoplay:`, `${nowQueue.autoplay ? "Activated" : "Not Active"}`, true)
-    .addField(`Total Duration:`, `${nowQueue.formattedDuration}`, true)
-    .addField(`Current Duration: \`[0:00 / ${nowTrack.formattedDuration}]\``, `\`\`\`🔴 | 🎶──────────────────────────────\`\`\``)
+    .addFields({ name: `Uploader:`, value: `**[${nowTrack.uploader.name}](${nowTrack.uploader.url})**`, inline: true })
+    .addFields({ name: `Requester:`, value: `${nowTrack.user}`, inline: true })
+    .addFields({ name: `Current Volume:`, value: `${nowQueue.volume}%`, inline: true })
+    .addFields({ name: `Filters:`, value: `${nowQueue.filters.names.join(", ") || "Normal"}`, inline: true })
+    .addFields({ name: `Autoplay:`, value: `${nowQueue.autoplay ? "Activated" : "Not Active"}`, inline: true })
+    .addFields({ name: `Total Duration:`, value: `${nowQueue.formattedDuration}`, inline: true })
+    .addFields({ name: `Current Duration: \`[0:00 / ${nowTrack.formattedDuration}]\``, value:`\`\`\`🔴 | 🎶──────────────────────────────\`\`\``, inline: false })
     .setTimestamp()
 
-  const row = new MessageActionRow()
+  const row = new ActionRowBuilder()
     .addComponents(
-      new MessageButton()
+      new ButtonBuilder()
         .setCustomId("pause")
         .setLabel(`Pause`)
         .setEmoji("⏯")
-        .setStyle("SUCCESS")
+        .setStyle(ButtonStyle.Success)
     )
     .addComponents(
-      new MessageButton()
+      new ButtonBuilder()
         .setCustomId("previous")
         .setLabel(`Previous`)
         .setEmoji("⬅")
-        .setStyle("PRIMARY")
+        .setStyle(ButtonStyle.Primary)
     )
     .addComponents(
-      new MessageButton()
+      new ButtonBuilder()
         .setCustomId("stop")
         .setLabel(`Stop`)
         .setEmoji("✖")
-        .setStyle("DANGER")
+        .setStyle(ButtonStyle.Danger)
     )
     .addComponents(
-      new MessageButton()
+      new ButtonBuilder()
         .setCustomId("skip")
         .setLabel(`Skip`)
         .setEmoji("➡")
-        .setStyle("PRIMARY")
+        .setStyle(ButtonStyle.Primary)
     )
     .addComponents(
-      new MessageButton()
+      new ButtonBuilder()
         .setCustomId("loop")
         .setLabel(`Loop`)
         .setEmoji("🔄")
-        .setStyle("SUCCESS")
+        .setStyle(ButtonStyle.Success)
     )
   return {
     embeds: [embeded],

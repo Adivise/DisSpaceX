@@ -1,7 +1,7 @@
-const { MessageEmbed } = require("discord.js");
+const { EmbedBuilder } = require("discord.js");
 
 module.exports = async (client, queue) => {
-    const embed = new MessageEmbed()
+    const embed = new EmbedBuilder()
         .setDescription(`\`📛\` | **Song has been:** \`Ended\``)
         .setColor('#000001')
 

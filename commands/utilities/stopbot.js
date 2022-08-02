@@ -1,5 +1,5 @@
 const chalk = require('chalk');
-const { MessageEmbed } = require('discord.js');
+const { EmbedBuilder } = require('discord.js');
 
 module.exports = {
     config: {
@@ -12,7 +12,7 @@ module.exports = {
     run: async (client, message, args) => {
     if(message.author.id != client.owner) return message.channel.send("You not the client the owner!")
 
-    const restart = new MessageEmbed()
+    const restart = new EmbedBuilder()
         .setDescription("**Account has been**: `Shutting down...`")
         .setColor("#000001");
 

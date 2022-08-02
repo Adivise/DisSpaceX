@@ -1,18 +1,18 @@
-const { MessageActionRow, MessageButton } = require('discord.js')
+const { ActionRowBuilder, ButtonBuilder, ButtonStyle } = require('discord.js')
 
 module.exports = async (client, message, pages, timeout, queueLength, queueDuration) => {
     if (!message && !message.channel) throw new Error('Channel is inaccessible.');
     if (!pages) throw new Error('Pages are not given.');
 
-    const row1 = new MessageButton()
+    const row1 = new ButtonBuilder()
         .setCustomId('back')
         .setLabel('⬅')
-        .setStyle('SECONDARY')
-    const row2 = new MessageButton()
+        .setStyle(ButtonStyle.Secondary)
+    const row2 = new ButtonBuilder()
         .setCustomId('next')
         .setLabel('➡')
-        .setStyle('SECONDARY')
-    const row = new MessageActionRow()
+        .setStyle(ButtonStyle.Secondary)
+    const row = new ActionRowBuilder()
         .addComponents(row1, row2)
 
     let page = 0;
@@ -32,7 +32,7 @@ module.exports = async (client, message, pages, timeout, queueLength, queueDurat
             curPage.edit({ embeds: [pages[page].setFooter({ text: `Page • ${page + 1}/${pages.length} | ${queueLength} • Songs | ${queueDuration} • Total duration`})], components: [row] })
         });
     collector.on('end', () => {
-        const disabled = new MessageActionRow()
+        const disabled = new ActionRowBuilder()
             .addComponents(row1.setDisabled(true), row2.setDisabled(true))
         curPage.edit({ embeds: [pages[page].setFooter({ text: `Page • ${page + 1}/${pages.length} | ${queueLength} • Songs | ${queueDuration} • Total duration`})], components: [disabled] })
     });

@@ -1,4 +1,4 @@
-const { MessageEmbed } = require("discord.js");
+const { EmbedBuilder } = require("discord.js");
 const pagequeue = require('../../structures/pagequeue.js');
 
 module.exports = {
@@ -31,7 +31,7 @@ module.exports = {
 		const pages = [];
 		for (let i = 0; i < pagesNum; i++) {
 			const str = songStrings.slice(i * 10, i * 10 + 10).join('');
-			const embed = new MessageEmbed()
+			const embed = new EmbedBuilder()
                 .setAuthor({ name: `Queue - ${message.guild.name}`, iconURL: message.guild.iconURL({ dynamic: true })})
                 .setThumbnail(queue.songs[0].thumbnail)
 				.setColor('#000001')
