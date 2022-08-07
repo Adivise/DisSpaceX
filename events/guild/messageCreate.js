@@ -24,7 +24,7 @@ module.exports = async (client, message) => {
     if(!message.guild.members.me.permissions.has(PermissionsBitField.Flags.SendMessages)) return await message.author.dmChannel.send({ content: `I don't have perm  **\`SEND_MESSAGES\`** permission in <#${message.channelId}> to execute command!` }).catch(() => {});
     if(!message.guild.members.me.permissions.has(PermissionsBitField.Flags.EmbedLinks)) return await message.channel.send({ content: `I don't have perm **\`EMBED_LINKS\`** to execute command!` }).catch(() => {});
     
-    console.log(`[COMMAND] ${command.config.name} executed by ${message.author.tag}`);
+    console.log(`[COMMAND] ${command.config.name} executed by ${message.author.tag} | [${client.user.tag}] in ${message.guild.name} (${message.guild.id})`);
 
     try {
         command.run(client, message, args);

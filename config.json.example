@@ -1,0 +1,13 @@
+{
+    "TOKEN": [
+        "TOKEN_BOT_1",
+        "TOKEN_BOT_2",
+        "TOKEN_BOT_3"
+    ],
+    "PREFIX": [
+        "-",
+        "+",
+        "!"
+    ],
+    "OWNER_ID": "YOUR_DISCORD_ID"
+}
