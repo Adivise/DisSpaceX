@@ -4,6 +4,7 @@
 - [x] MessageButton
 - [x] No Database
 - [x] Easy to use
+- [x] Multi Bot Login (Per Prefix!)
 
 ## 🎶 Support Source
 - [x] Youtube
@@ -32,12 +33,22 @@ After installation finishes you can use `node .` to start the bot. or `Run Start
 
 ## 📚 Configuration
 
-Copy or Rename `.env.example` to `.env` and fill out the values:
+Copy or Rename `config.json.example` to `config.json` and fill out the values:
 
-```.env
-TOKEN=replace_on_here
-PREFIX=!
-OWNER_ID=replace_on_here
+```json
+{
+    "TOKEN": [
+        "TOKEN_BOT_1",
+        "TOKEN_BOT_2",
+        "TOKEN_BOT_3"
+    ],
+    "PREFIX": [
+        "-",
+        "+",
+        "!"
+    ],
+    "OWNER_ID": "YOUR_DISCORD_ID"
+}
 ```
 
 ## 📄 Features & Commands
