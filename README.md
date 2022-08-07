@@ -4,7 +4,7 @@
 - [x] MessageButton
 - [x] No Database
 - [x] Easy to use
-- [x] Multi Bot Login (Per Prefix!)
+- [x] Multi Bot Login (Per Prefix!) [Unlimited Bot Added]
 
 ## 🎶 Support Source
 - [x] Youtube
