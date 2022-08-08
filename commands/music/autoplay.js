@@ -20,16 +20,16 @@ module.exports = {
             client.distube.toggleAutoplay(message);
     
             const embed = new EmbedBuilder()
-                .setColor(message.client.color)
-                .setDescription(`\`⏯\` Activate **Autoplay** mode.`)
+                .setColor("#000001")
+                .setDescription(`\`⏯\` Activate **Autoplay** mode.`);
 
             msg.edit({ content: ' ', embeds: [embed] });
         } else {
             client.distube.toggleAutoplay(message);
 
             const embed = new EmbedBuilder()
-                .setColor(message.client.color)
-                .setDescription(`\`⏯\` Disable **Autoplay** mode.`)
+                .setColor("#000001")
+                .setDescription(`\`⏯\` Disable **Autoplay** mode.`);
 
             msg.edit({ content: ' ', embeds: [embed] });
         }
