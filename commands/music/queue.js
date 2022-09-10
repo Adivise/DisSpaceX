@@ -13,7 +13,7 @@ module.exports = {
         const queue = client.distube.getQueue(message);
         if (!queue) message.channel.send(`There is nothing in the queue right now!`)
         const { channel } = message.member.voice;
-        if (!channel || message.member.voice.channel !== message.guild.me.voice.channel) return message.channel.send("You need to be in a same/voice channel.")
+        if (!channel || message.member.voice.channel !== message.guild.members.me.voice.channel) return message.channel.send("You need to be in a same/voice channel.")
 
 		const pagesNum = Math.ceil(queue.songs.length / 10);
 		if(pagesNum === 0) pagesNum = 1;
