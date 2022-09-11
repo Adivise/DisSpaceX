@@ -12,6 +12,6 @@ module.exports = async (client) => {
     } catch (e) {
         console.log(e);
     }
-    await delay(4000);
-    console.log(chalk.greenBright(`[INFORMATION] Distube Events Loaded`));
+   // await delay(4000);
+   // console.log(chalk.greenBright(`[INFORMATION] Distube Events Loaded`));
 };
