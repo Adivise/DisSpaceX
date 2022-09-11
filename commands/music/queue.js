@@ -1,4 +1,4 @@
-const { MessageEmbed } = require("discord.js");
+const { EmbedBuilder } = require("discord.js");
 const pagequeue = require('../../structures/pagequeue.js');
 
 module.exports = {
@@ -13,7 +13,7 @@ module.exports = {
         const queue = client.distube.getQueue(message);
         if (!queue) message.channel.send(`There is nothing in the queue right now!`)
         const { channel } = message.member.voice;
-        if (!channel || message.member.voice.channel !== message.guild.me.voice.channel) return message.channel.send("You need to be in a same/voice channel.")
+        if (!channel || message.member.voice.channel !== message.guild.members.me.voice.channel) return message.channel.send("You need to be in a same/voice channel.")
 
 		const pagesNum = Math.ceil(queue.songs.length / 10);
 		if(pagesNum === 0) pagesNum = 1;
@@ -31,7 +31,7 @@ module.exports = {
 		const pages = [];
 		for (let i = 0; i < pagesNum; i++) {
 			const str = songStrings.slice(i * 10, i * 10 + 10).join('');
-			const embed = new MessageEmbed()
+			const embed = new EmbedBuilder()
                 .setAuthor({ name: `Queue - ${message.guild.name}`, iconURL: message.guild.iconURL({ dynamic: true })})
                 .setThumbnail(queue.songs[0].thumbnail)
 				.setColor('#000001')

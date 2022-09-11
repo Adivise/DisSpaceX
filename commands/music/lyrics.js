@@ -1,5 +1,5 @@
 const lyricsfinder = require('lyrics-finder');
-const { MessageEmbed } = require('discord.js');
+const { EmbedBuilder } = require('discord.js');
 
 module.exports = { 
     config: {
@@ -15,7 +15,7 @@ module.exports = {
         const queue = client.distube.getQueue(message);
         if (!queue) msg.edit(`There is nothing in the queue right now!`)
         const { channel } = message.member.voice;
-        if (!channel || message.member.voice.channel !== message.guild.me.voice.channel) return msg.edit("You need to be in a same/voice channel.")
+        if (!channel || message.member.voice.channel !== message.guild.members.me.voice.channel) return msg.edit("You need to be in a same/voice channel.")
 
         let song = args.join(" ");
             let CurrentSong = queue.songs[0];
@@ -30,7 +30,7 @@ module.exports = {
             console.log(err);
             msg.edit("Couldn't find any lyrics for that song!");
         }
-        let lyricsEmbed = new MessageEmbed()
+        let lyricsEmbed = new EmbedBuilder()
             .setColor('#000001')
             .setTitle(`Lyrics`)
             .setDescription(`**${song}**\n${lyrics}`)

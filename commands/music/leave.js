@@ -1,4 +1,4 @@
-const { MessageEmbed } = require("discord.js");
+const { EmbedBuilder } = require("discord.js");
 
 module.exports = {
     config: {
@@ -11,8 +11,9 @@ module.exports = {
     run: async (client, message, args) => {
         const msg = await message.channel.send("Processing.....");
         const queue = client.distube.getQueue(message);
+        
 		if (!queue) return msg.edit(`There is nothing in the queue right now!`)
-        const clientVoice = message.guild.me.voice.channel;
+        const clientVoice = message.guild.members.me.voice.channel;
         const memberVoice = message.member.voice.channel;
 
         if (clientVoice === memberVoice) {
@@ -23,7 +24,7 @@ module.exports = {
                 client.distube.voices.leave(message.guild);
             }
 
-            const embed = new MessageEmbed()
+            const embed = new EmbedBuilder()
                 .setDescription(`\`🚫\` | **Left:** | \`${memberVoice.name}\``)
                 .setColor('#000001')
 

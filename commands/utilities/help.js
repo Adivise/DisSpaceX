@@ -1,4 +1,4 @@
-const { MessageEmbed } = require("discord.js");
+const { EmbedBuilder } = require("discord.js");
 const { readdirSync } = require("fs");
 const { stripIndents } = require("common-tags");
 const chalk = require("chalk");
@@ -13,23 +13,22 @@ module.exports = {
         accessableby: "Members"
     },
     run: async (client, message, args) => {
-        console.log(chalk.magenta(`[COMMAND] Help used by ${message.author.tag} from ${message.guild.name}`));
-        const embed = new MessageEmbed()
+        const embed = new EmbedBuilder()
             .setColor('#000001')
-            .setAuthor({ name: `${message.guild.me.displayName} Help Command!`, iconURL: message.guild.iconURL({ dynamic: true })})
+            .setAuthor({ name: `${message.guild.members.me.displayName} Help Command!`, iconURL: message.guild.iconURL({ dynamic: true })})
             .setThumbnail(client.user.displayAvatarURL({ dynamic: true, size: 2048 }));
 
         if(!args[0]) {
             const categories = readdirSync("./commands/")
 
             embed.setDescription(`The bot prefix is: **${client.prefix}**`)
-            embed.setFooter({ text: `© ${message.guild.me.displayName} | Total Commands: ${client.commands.size}`, iconURL: client.user.displayAvatarURL({ dynamic: true })});
+            embed.setFooter({ text: `© ${message.guild.members.me.displayName} | Total Commands: ${client.commands.size}`, iconURL: client.user.displayAvatarURL({ dynamic: true })});
 
             categories.forEach(category => {
                 const dir = client.commands.filter(c => c.config.category === category)
                 const capitalise = category.slice(0, 1).toUpperCase() + category.slice(1)
                 try {
-                    embed.addField(`❯ ${capitalise} [${dir.size}]:`, dir.map(c => `\`${c.config.name}\``).join(" "))
+                    embed.addFields({ name: `❯ ${capitalise} [${dir.size}]:`, value: dir.map(c => `\`${c.config.name}\``).join(" "), inline: false })
                 } catch(e) {
                     console.log(e)
                 }
