@@ -1,20 +1,18 @@
 const { EmbedBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle } = require("discord.js");
 
 module.exports = {
-    config: {
-        name: "invite",
-        aliases: [],
-        category: "utilities",
-        description: "Invite the bot to your server.",
-        accessableby: "Members"
-    },
-    run: async (client, message, args) => {
+    name: ["utilities", "invite"],
+    description: "Invite bot to your server.",
+    category: "Utilities",
+    run: async (client, interaction) => {
+        await interaction.deferReply({ ephemeral: false });
+
         const embed = new EmbedBuilder()
-        .setColor("#000001")
+        .setColor(client.color)
         .setAuthor({ name: "Invite!"})
         .setDescription("```Invite me to your server!```")
         .setTimestamp()
-        .setFooter({ text: `Requested by ${message.author.tag}`, iconURL: message.author.displayAvatarURL()});
+        .setFooter({ text: `Requested by ${interaction.user.tag}`, iconURL: interaction.user.displayAvatarURL()});
 
         const row = new ActionRowBuilder()
             .addComponents(
@@ -25,6 +23,6 @@ module.exports = {
                     .setStyle(ButtonStyle.Link)
             )
         
-        message.channel.send({ embeds: [embed], components: [row] });
+        interaction.editReply({ embeds: [embed], components: [row] });
     }
 }

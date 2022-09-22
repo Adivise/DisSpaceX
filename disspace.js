@@ -1,8 +1,7 @@
-const { Client, Collection, GatewayIntentBits } = require("discord.js");
+const { Client, Collection, GatewayIntentBits, Partials } = require("discord.js");
 const { DisTube } = require('distube');
 const { SoundCloudPlugin } = require('@distube/soundcloud');
 const { SpotifyPlugin } = require('@distube/spotify');
-const { YtDlpPlugin } = require("@distube/yt-dlp");
 
 class MainClient extends Client {
     constructor() {
@@ -15,44 +14,41 @@ class MainClient extends Client {
                 GatewayIntentBits.GuildVoiceStates,
                 GatewayIntentBits.MessageContent,
             ],
-            allowedMentions: {
-                parse: ["roles", "users", "everyone"],
-                repliedUser: false
-            },
+            partials: [Partials.Channel, Partials.Message]
         });
 
-        process.on('unhandledRejection', error => console.log(error));
-        process.on('uncaughtException', error => console.log(error));
+    process.on('unhandledRejection', error => console.log(error));
+    process.on('uncaughtException', error => console.log(error));
 
-        this.config = require('./settings/config.js');
-        this.prefix = this.config.PREFIX;
-        this.owner = this.config.OWNER_ID;
-        if (!this.token) this.token = this.config.TOKEN;
+    this.config = require('./settings/config.js');
+    this.owner = this.config.OWNER_ID;
+    this.color = this.config.EMBED_COLOR;
+    if (!this.token) this.token = this.config.TOKEN;
 
-        const client = this;
+    const client = this;
 
-        this.distube = new DisTube(client, {
-            searchSongs: 0, /// SET TO 5 FOR ENABLE SEARCH MODE!
-            searchCooldown: 30,
-            leaveOnEmpty: true,
-            emptyCooldown: 60,
-            leaveOnFinish: true,
-            leaveOnStop: true,
-            plugins: [
-                new SoundCloudPlugin(),
-                new SpotifyPlugin({
-                    emitEventsAfterFetching: true
-                }),
-                new YtDlpPlugin()
-            ],
-        });
+    this.distube = new DisTube(client, {
+        searchSongs: 0,
+        searchCooldown: 30,
+        leaveOnEmpty: true,
+        emptyCooldown: 60,
+        leaveOnFinish: true,
+        leaveOnStop: true,
+        plugins: [
+            new SoundCloudPlugin(),
+            new SpotifyPlugin({
+                emitEventsAfterFetching: true
+            })
+        ],
+    });
 
-        ["aliases", "commands"].forEach(x => client[x] = new Collection());
-        ["loadCommands", "loadEvents", "loadDistube"].forEach(x => require(`./handlers/${x}`)(client));
+    ["slash"].forEach(x => client[x] = new Collection());
+    ["loadCommands", "loadEvents", "loadPlayer", "loadDatabase"].forEach(x => require(`./handlers/${x}`)(client));
 
     }
     connect() {
         return super.login(this.token);
     };
 };
+
 module.exports = MainClient;

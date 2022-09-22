@@ -1,24 +1,18 @@
-const chalk = require('chalk');
 const { EmbedBuilder } = require('discord.js');
 
 module.exports = {
-    config: {
-        name: "restart",
-        description: "shuts down the client!",
-        category: "utilities",
-        accessableby: "Owner",
-        aliases: ["stopbot"]
-    },
-    run: async (client, message, args) => {
-    if(message.author.id != client.owner) return message.channel.send("You not the client the owner!")
+    name: ["utilities", "restart"],
+    description: "Shutdown bot.",
+    category: "Utilities",
+    run: async (client, interaction) => {
+        await interaction.deferReply({ ephemeral: false });
+        if(interaction.user.id != client.owner) return interaction.channel.send("You not the client the owner!")
 
-    const restart = new EmbedBuilder()
-        .setDescription("**Account has been**: `Shutting down...`")
-        .setColor("#000001");
+        const embed = new EmbedBuilder()
+            .setDescription("**Account has been**: `Shutting down...`")
+            .setColor(client.color);
 
-    await message.channel.send({ embeds: [restart] });
-        console.log(chalk.red(`[CLIENT] Restarting...`));
-            
-    process.exit();
+        await interaction.editReply({ embeds: [embed] });
+        process.exit();
     }
 };

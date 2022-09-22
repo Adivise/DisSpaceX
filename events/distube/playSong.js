@@ -1,6 +1,15 @@
 const { EmbedBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle } = require("discord.js");
+const { Database } = require("st.db");
+
+const GSetup = new Database("./settings/models/setup.json", { databaseInObject: true });
 
 module.exports = async (client, queue, track) => {
+  
+  await client.UpdateQueueMsg(queue);
+
+  const db = await GSetup.get(queue.textChannel.guild.id);
+  if (db.setup_enable === true) return;
+
   var newQueue = client.distube.getQueue(queue.id)
   var data = disspace(newQueue, track)
 

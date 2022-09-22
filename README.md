@@ -1,8 +1,10 @@
 ## 📑 Short Feature
 - [x] Music
 - [x] Filters
-- [x] MessageButton
-- [x] No Database
+- [x] AutoComplete (Search!)
+- [x] Song Request Channel
+- [x] Message Button
+- [x] Database (Json)
 - [x] Easy to use
 
 ## 🎶 Support Source
@@ -35,67 +37,55 @@ After installation finishes you can use `node .` to start the bot. or `Run Start
 Copy or Rename `.env.example` to `.env` and fill out the values:
 
 ```.env
-TOKEN=replace_on_here
-PREFIX=!
-OWNER_ID=replace_on_here
+TOKEN=REPLACE_HERE
+OWNER_ID=REPLACE_HERE
+EMBED_COLOR=#000001
 ```
 
 ## 📄 Features & Commands
 
-> Note: The default prefix is '#'
+> Note: The default prefix is '/'
 
 🎶 **Music Commands!** 
-- Play (#play, #p, #pplay)
-- Autoplay (#autoplay, #ap)
-- Lyrics (#lyrics)
-- Playskip (#playskip)
-- Replay (#replay)
-- Previous (#previous)
-- Nowplaying (#nowplaying, #np)
-- Queue (#queue, #q)
-- Loop (#loop, #l)
-- Loopqueue (#loopqueue, #lq)
-- Shuffle (#shuffle)
-- Volume control (#vol)
-- Pause (#pause, #pa)
-- Resume (#resume, #re)
-- Skip (#skip, #s)
-- Skipto (#skipto, #st)
-- Join (#join, #cmon, summon)
-- Leave (#leave, #dc, #lev, #stop)
+- Play (/play)
+- Autoplay (/autoplay)
+- Lyrics (/lyrics)
+- Playskip (/playskip)
+- Replay (/replay)
+- Previous (/previous)
+- Nowplaying (/nowplaying)
+- Queue (/queue)
+- Loop (/loop)
+- Loopqueue (/loopqueue)
+- Shuffle (/shuffle)
+- Volume control (/volume)
+- Pause (/pause)
+- Resume (/resume)
+- Skip (/skip)
+- Skipto (/skipto)
+- Join (/join)
+- Leave (/leave)
 
 ⏺ **Filter Commands!**
-- Vaporwave (#vaporwave, #vw)
-- earwax (#earwax)
-- Nightcore (#nightcore, nc)
-- 3d (#3d)
-- echo (#echo)
-- flanger (#flanger, #fg)
-- gate (#gate)
-- haas (#hass)
-- karaoke (#kk, #karaoke)
-- mcopand (#mp, #mcopand)
-- phaser (#phaser)
-- reverse (#reverse)
-- surround (#sr, #surround)
-- tremolo (#tremolo)
-- Bassboost (#bb, #bassboost)
-- Reset (#reset)
+- Vaporwave (/vaporwave)
+- Earwax (/earwax)
+- Nightcore (/nightcore)
+- 3d (/3d)
+- Echo (/echo)
+- Flanger (/flanger)
+- Gate (/gate)
+- Haas (/hass)
+- Karaoke (/karaoke)
+- Mcopand (/mcopand)
+- Phaser (/phaser)
+- Reverse (/reverse)
+- Surround (/surround)
+- Tremolo (/tremolo)
+- Bassboost (/bassboost)
+- Reset (/reset)
 
 📑 **Utilities Commands!**
-- FilterList (#fl, #filterlist)
-- Help (#help, #h, #halp, #commands)
-- Invite (#invite)
-- Restart (#restart, #stopbot, #shutdown)
-
-## 🖼 Picture (OLD)
-
-- [CLICK ME!](https://imgur.com/a/zvP3NIi)
-
-![see](https://i.imgur.com/03KM8sq.png)
-![see](https://i.imgur.com/lr4whgX.png)
-![see](https://i.imgur.com/Uv1JX4f.png)
-![see](https://i.imgur.com/CqKhn2a.png)
-![see](https://i.imgur.com/sbkZXnb.png)
-![see](https://i.imgur.com/4GGIXyZ.png)
-![see](https://i.imgur.com/poraMNP.png)
+- Help (/help)
+- Invite (/invite)
+- Restart (/restart)
+- Setup (/setup)

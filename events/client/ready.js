@@ -8,9 +8,9 @@ module.exports = async (client) => {
     let channels = client.channels.cache.size;
 
     const activities = [
-        `${client.prefix}help | ${guilds} servers`,
-        `${client.prefix}play <input> | ${users} users`,
-        `${client.prefix}filterlist | ${channels} channels`,
+        `/help | ${guilds} servers`,
+        `/play <search> | ${users} users`,
+        `/custom <args> | ${channels} channels`,
     ];
 
     setInterval(() => {
