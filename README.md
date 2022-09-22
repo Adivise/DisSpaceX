@@ -1,7 +1,7 @@
 ## 📑 Short Feature
 - [x] Music
 - [x] Filters
-- [x] AutoComplete (Search!)
+- [x] AutoComplete (Play Command!)
 - [x] Song Request Channel
 - [x] Message Button
 - [x] Database (Json)
