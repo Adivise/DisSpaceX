@@ -16,10 +16,10 @@ const QueuePage = async (client, message, pages, timeout, queueLength, queueDura
         .addComponents(row1, row2)
 
     let page = 0;
-    const curPage = await message.channel.send({ embeds: [pages[page].setFooter({ text: `Page • ${page + 1}/${pages.length} | ${queueLength} • Songs | ${queueDuration} • Total duration`})], components: [row], allowedMentions: { repliedUser: false } });
+    const curPage = await message.editReply({ embeds: [pages[page].setFooter({ text: `Page • ${page + 1}/${pages.length} | ${queueLength} • Songs | ${queueDuration} • Total duration`})], components: [row], allowedMentions: { repliedUser: false } });
     if(pages.length == 0) return;
 
-    const filter = (interaction) => interaction.user.id === message.author.id ? true : false && interaction.deferUpdate();
+    const filter = (m) => m.user.id === message.user.id;
     const collector = await curPage.createMessageComponentCollector({ filter, time: timeout });
 
     collector.on('collect', async (interaction) => {
@@ -31,12 +31,15 @@ const QueuePage = async (client, message, pages, timeout, queueLength, queueDura
             }
             curPage.edit({ embeds: [pages[page].setFooter({ text: `Page • ${page + 1}/${pages.length} | ${queueLength} • Songs | ${queueDuration} • Total duration`})], components: [row] })
         });
+
     collector.on('end', () => {
         const disabled = new ActionRowBuilder()
             .addComponents(row1.setDisabled(true), row2.setDisabled(true))
         curPage.edit({ embeds: [pages[page].setFooter({ text: `Page • ${page + 1}/${pages.length} | ${queueLength} • Songs | ${queueDuration} • Total duration`})], components: [disabled] })
     });
+
     return curPage;
 };
+
 
 module.exports = { QueuePage };
