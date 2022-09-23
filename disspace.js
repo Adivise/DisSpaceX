@@ -28,11 +28,9 @@ class MainClient extends Client {
     const client = this;
 
     this.distube = new DisTube(client, {
-        searchSongs: 0,
-        searchCooldown: 30,
         leaveOnEmpty: true,
         emptyCooldown: 60,
-        leaveOnFinish: true,
+        leaveOnFinish: false,
         leaveOnStop: true,
         plugins: [
             new SoundCloudPlugin(),
