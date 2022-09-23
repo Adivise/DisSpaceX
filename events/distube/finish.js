@@ -1,11 +1,21 @@
 const { EmbedBuilder } = require("discord.js");
+const { Database } = require("st.db");
+
+const GVoice = new Database("./settings/models/voice.json", { databaseInObject: true });
 
 module.exports = async (client, queue) => {
-    await client.UpdateMusic(queue);
-    
-    const embed = new EmbedBuilder()
-        .setDescription(`\`📛\` | **Song has been:** \`Ended\``)
-        .setColor('#000001')
+    const db = await GVoice.get(queue.textChannel.guild.id);
 
-    queue.textChannel.send({ embeds: [embed] })
+    if (db.voice_enable === true) {
+        return await client.UpdateMusic(queue);
+    } else if (db.voice_enable === false) {
+        await client.UpdateMusic(queue);
+        await client.distube.voices.leave(queue.textChannel.guild);
+    
+        const embed = new EmbedBuilder()
+            .setDescription(`\`📛\` | **Song has been:** \`Ended\``)
+            .setColor('#000001')
+    
+        queue.textChannel.send({ embeds: [embed] })
+    }
 }

@@ -20,7 +20,7 @@ module.exports = {
 				.setDescription(`\`⏯\` | **Song has been:** \`Resumed\``);
 
 			interaction.editReply({ embeds: [embed] });
-            client.UpdateQueueMsg(queue);
+            await client.UpdateQueueMsg(queue);
 		} else {
 			await client.distube.pause(interaction);
 
@@ -29,7 +29,7 @@ module.exports = {
                 .setDescription(`\`⏯\` | **Song has been:** \`Paused\``);
 
 			interaction.editReply({ embeds: [embed] });
-            client.UpdateQueueMsg(queue);
+            await client.UpdateQueueMsg(queue);
 		}
     }
 }

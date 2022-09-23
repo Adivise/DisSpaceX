@@ -19,14 +19,13 @@ module.exports = {
 
             interaction.editReply({ embeds: [embed] });
         } else { 
-            await client.distube.previous(interaction)
+            await client.distube.previous(interaction);
 
             const embed = new EmbedBuilder()
                 .setColor(client.color)
                 .setDescription("\`⏮\` | **Song has been:** `Previous`")
 
             interaction.editReply({ embeds: [embed] });
-
         }        
     }
 }

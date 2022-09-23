@@ -32,7 +32,7 @@ module.exports = {
 
         if (Number(volume) < 1 || Number(volume) > 100) return interaction.editReply(`Please provide a number between 1 and 100`)
 
-        client.distube.setVolume(interaction, volume);
+        await client.distube.setVolume(interaction, volume);
 
         const embed = new EmbedBuilder()
             .setColor(client.color)

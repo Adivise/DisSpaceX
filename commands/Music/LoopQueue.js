@@ -13,7 +13,7 @@ module.exports = {
         if (!channel || interaction.member.voice.channel !== interaction.guild.members.me.voice.channel) return interaction.editReply("You need to be in a same/voice channel.")
 
         if (queue.repeatMode === 2) {
-            client.distube.setRepeatMode(interaction, 0);
+            await client.distube.setRepeatMode(interaction, 0);
 
             const embed = new EmbedBuilder()
                 .setColor(client.color)
@@ -21,7 +21,7 @@ module.exports = {
 
             interaction.editReply({ embeds: [embed] });
         } else {
-            client.distube.setRepeatMode(interaction, 2);
+            await client.distube.setRepeatMode(interaction, 2);
             
             const embed = new EmbedBuilder()
                 .setColor(client.color)

@@ -13,19 +13,19 @@ module.exports = {
         if (!channel || interaction.member.voice.channel !== interaction.guild.members.me.voice.channel) return interaction.editReply("You need to be in a same/voice channel.")
 
         if (!queue.autoplay) {
-            client.distube.toggleAutoplay(interaction);
+            await client.distube.toggleAutoplay(interaction);
     
             const embed = new EmbedBuilder()
                 .setColor(client.color)
-                .setDescription(`\`⏯\` Activate **Autoplay** mode.`);
+                .setDescription(`\`📻\` | *Autoplay has been:* \`Activated\``);
 
             interaction.editReply({ embeds: [embed] });
         } else {
-            client.distube.toggleAutoplay(interaction);
+            await client.distube.toggleAutoplay(interaction);
 
             const embed = new EmbedBuilder()
                 .setColor(client.color)
-                .setDescription(`\`⏯\` Disable **Autoplay** mode.`);
+                .setDescription(`\`📻\` | *Autoplay has been:* \`Deactivated\``);
 
             interaction.editReply({ embeds: [embed] });
         }

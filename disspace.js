@@ -30,7 +30,7 @@ class MainClient extends Client {
     this.distube = new DisTube(client, {
         leaveOnEmpty: true,
         emptyCooldown: 60,
-        leaveOnFinish: false,
+        leaveOnFinish: false, // Don't set this to "true" for 247 Commands working!
         leaveOnStop: true,
         plugins: [
             new SoundCloudPlugin(),

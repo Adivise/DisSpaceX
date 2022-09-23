@@ -1,9 +1,9 @@
-const { EmbedBuilder } = require("discord.js");
+const { EmbedBuilder, ApplicationCommandType } = require('discord.js');
 
-module.exports = {
-    name: ["music", "skip"],
-    description: "Skips the song currently playing.",
-    category: "Music",
+module.exports = { 
+    name: ["Context | Skip"],
+    type: ApplicationCommandType.Message,
+    category: "Context",
     run: async (client, interaction) => {
         await interaction.deferReply({ ephemeral: false });
 

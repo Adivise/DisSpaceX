@@ -10,7 +10,7 @@ module.exports = async (client) => {
     const activities = [
         `/help | ${guilds} servers`,
         `/play <search> | ${users} users`,
-        `/custom <args> | ${channels} channels`,
+        `/filter custom <args> | ${channels} channels`,
     ];
 
     setInterval(() => {

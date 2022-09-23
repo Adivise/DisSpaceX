@@ -36,13 +36,13 @@ module.exports = {
 
         const song = queue.songs[tracks];
 
-        queue.songs.splice(tracks);
-        queue.addToQueue(song, position);
+        await queue.songs.splice(tracks);
+        await queue.addToQueue(song, position);
 
         const embed = new EmbedBuilder()
             .setDescription(`**Moved • [${song.name}](${song.url})** to ${position}`)
             .setColor(client.color)
 
-        interaction.editReply({ content: " ", embeds: [embed] });
+        interaction.editReply({ embeds: [embed] });
     }
 }

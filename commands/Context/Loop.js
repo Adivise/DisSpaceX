@@ -1,9 +1,9 @@
-const { EmbedBuilder } = require("discord.js");
+const { EmbedBuilder, ApplicationCommandType } = require('discord.js');
 
 module.exports = {
-    name: ["music", "skip"],
-    description: "Skips the song currently playing.",
-    category: "Music",
+    name: ["Context | Loop"],
+    type: ApplicationCommandType.Message,
+    category: "Context",
     run: async (client, interaction) => {
         await interaction.deferReply({ ephemeral: false });
 
@@ -12,20 +12,22 @@ module.exports = {
         const { channel } = interaction.member.voice;
         if (!channel || interaction.member.voice.channel !== interaction.guild.members.me.voice.channel) return interaction.editReply("You need to be in a same/voice channel.")
 
-        if (queue.songs.length === 1 && queue.autoplay === false) {
+        if (queue.repeatMode === 2) {
+            await client.distube.setRepeatMode(interaction, 0);
+
             const embed = new EmbedBuilder()
                 .setColor(client.color)
-                .setDescription("\`🚨\` | **There are no** `Songs` **in queue**")
+                .setDescription(`\`🔁\` | **Song is unloop:** \`All\``)
 
             interaction.editReply({ embeds: [embed] });
-        } else { 
-            await client.distube.skip(interaction);
+        } else {
+            await client.distube.setRepeatMode(interaction, 2);
             
             const embed = new EmbedBuilder()
                 .setColor(client.color)
-                .setDescription("\`⏭\` | **Song has been:** `Skipped`")
+                .setDescription(`\`🔁\` | **Song is loop:** \`All\``)
 
             interaction.editReply({ embeds: [embed] });
         }
-    }
-}
+	}
+};

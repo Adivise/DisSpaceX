@@ -34,16 +34,19 @@ module.exports = async (client) => {
         });
     }
 
-    client.createLang = async function (guildId) {
-        const db = new Database("./settings/models/language.json", { databaseInObject: true });
+    client.createEVoice = async function (interaction, channel, message) {
+        const db = new Database("./settings/models/voice.json", { databaseInObject: true });
+        await db.set(interaction.guild.id, {
+            voice_enable: true,
+        });
+    }
 
-        const database = await db.has(guildId);
-        if (!database) {
-            await db.set(guildId, {
-                language: "en"
-            });
-        }
-    };
+    client.createDVoice = async function (interaction, channel, message) {
+        const db = new Database("./settings/models/voice.json", { databaseInObject: true });
+        await db.set(interaction.guild.id, {
+            voice_enable: false,
+        });
+    }
 
     client.createPlay = async function (interaction, message) {
         const db = new Database("./settings/models/message.json", { databaseInObject: true });

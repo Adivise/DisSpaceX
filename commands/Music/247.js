@@ -1,8 +1,11 @@
-const { EmbedBuilder } = require("discord.js");
+const { EmbedBuilder } = require('discord.js');
+const { Database } = require("st.db");
+
+const GVoice = new Database("./settings/models/voice.json", { databaseInObject: true });
 
 module.exports = {
-    name: ["music", "skip"],
-    description: "Skips the song currently playing.",
+    name: ["music", "247"],
+    description: "24/7 in voice channel",
     category: "Music",
     run: async (client, interaction) => {
         await interaction.deferReply({ ephemeral: false });
@@ -12,18 +15,22 @@ module.exports = {
         const { channel } = interaction.member.voice;
         if (!channel || interaction.member.voice.channel !== interaction.guild.members.me.voice.channel) return interaction.editReply("You need to be in a same/voice channel.")
 
-        if (queue.songs.length === 1 && queue.autoplay === false) {
+        const db = await GVoice.get(interaction.guild.id);
+
+        if (db.voice_enable === true) {
+            await client.createDVoice(interaction);
+
             const embed = new EmbedBuilder()
-                .setColor(client.color)
-                .setDescription("\`🚨\` | **There are no** `Songs` **in queue**")
+                .setDescription(`\`🌙\` | *Mode 24/7 has been:* \`Deactivated\``)
+                .setColor(client.color);
 
             interaction.editReply({ embeds: [embed] });
-        } else { 
-            await client.distube.skip(interaction);
-            
+        } else if (db.voice_enable === false) {
+            await client.createEVoice(interaction);
+
             const embed = new EmbedBuilder()
-                .setColor(client.color)
-                .setDescription("\`⏭\` | **Song has been:** `Skipped`")
+                .setDescription(`\`🌕\` | *Mode 24/7 has been:* \`Activated\``)
+                .setColor(client.color);
 
             interaction.editReply({ embeds: [embed] });
         }

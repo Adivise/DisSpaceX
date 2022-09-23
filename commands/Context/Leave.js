@@ -1,9 +1,9 @@
-const { EmbedBuilder } = require("discord.js");
+const { EmbedBuilder, ApplicationCommandType } = require('discord.js');
 
-module.exports = {
-    name: ["music", "leave"],
-    description: "Make the bot leave the voice channel.",
-    category: "Music",
+module.exports = { 
+    name: ["Context | Stop"],
+    type: ApplicationCommandType.Message,
+    category: "Context",
     run: async (client, interaction) => {
         await interaction.deferReply({ ephemeral: false });
 

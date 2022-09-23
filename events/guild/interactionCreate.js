@@ -1,11 +1,13 @@
-const { InteractionType } = require("discord.js");
+const { InteractionType, PermissionsBitField } = require("discord.js");
 const ytsr = require("@distube/ytsr");
+const { SEARCH_DEFAULT } = require("../../settings/config.js")
 
 module.exports = async(client, interaction) => {
     if (interaction.isCommand || interaction.isContextMenuCommand || interaction.isModalSubmit || interaction.isChatInputCommand) {
         if (!interaction.guild || interaction.user.bot) return;
 
         await client.createExSetup(interaction);
+        await client.createDVoice(interaction);
 
         let subCommandName = "";
         try {
@@ -17,8 +19,7 @@ module.exports = async(client, interaction) => {
         } catch { };
 
         if (interaction.type == InteractionType.ApplicationCommandAutocomplete) {
-            const SDefault = ["lo fi", "jvke", "post malone", "bassboost"];
-            const Random = SDefault[Math.floor(Math.random() * SDefault.length)];
+            const Random = SEARCH_DEFAULT[Math.floor(Math.random() * SEARCH_DEFAULT.length)];
             if(interaction.commandName == "play") {
                 let choice = []
                 await ytsr(interaction.options.getString("search") || Random, { safeSearch: true, limit: 10 }).then(result => {
