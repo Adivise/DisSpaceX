@@ -3,6 +3,7 @@
 - [x] Filters
 - [x] AutoComplete (Search!)
 - [x] Song Request Channel
+- [x] Context Message Menu
 - [x] Message Button
 - [x] Database (Json)
 - [x] Easy to use
