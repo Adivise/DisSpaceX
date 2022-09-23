@@ -17,7 +17,7 @@ module.exports = async(client, interaction) => {
         } catch { };
 
         if (interaction.type == InteractionType.ApplicationCommandAutocomplete) {
-            const SDefault = ["Anime Song", "JVKE", "POST MALONE", "DUBSTEP", "BASSBOOST"];
+            const SDefault = ["lo fi", "jvke", "post malone", "bassboost"];
             const Random = SDefault[Math.floor(Math.random() * SDefault.length)];
             if(interaction.commandName == "play") {
                 let choice = []
@@ -26,6 +26,12 @@ module.exports = async(client, interaction) => {
                 });
                 return await interaction.respond(choice).catch(() => { });
             } else if (interaction.options.getSubcommand() == "playskip") {
+                let choice = []
+                await ytsr(interaction.options.getString("search") || Random, { safeSearch: true, limit: 10 }).then(result => {
+                    result.items.forEach(x => { choice.push({ name: x.name, value: x.url }) })
+                });
+                return await interaction.respond(choice).catch(() => { });
+            } else if (interaction.options.getSubcommand() == "playtop") {
                 let choice = []
                 await ytsr(interaction.options.getString("search") || Random, { safeSearch: true, limit: 10 }).then(result => {
                     result.items.forEach(x => { choice.push({ name: x.name, value: x.url }) })
@@ -41,7 +47,7 @@ module.exports = async(client, interaction) => {
             case 3: return command.name[0] == interaction.commandName && command.name[1] == subCommandGroupName && command.name[2] == subCommandName;
             }
         });
-    
+
     if (!command) return;
     if (command) {
         try {
