@@ -22,6 +22,7 @@
     "figlet": "^1.5.2",
     "libsodium-wrappers": "^0.7.10",
     "lyrics-finder": "^21.7.0",
+    "opusscript": "^0.0.8",
     "path": "^0.12.7",
     "plsargs": "^0.1.6",
     "recursive-readdir": "^2.2.2",
