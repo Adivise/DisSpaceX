@@ -31,9 +31,9 @@ module.exports = async (client, oldState, newState) => {
 
 			const vcMembers = oldState.guild.members.me.voice.channel?.members.size;
 			if (!vcMembers || vcMembers === 1) {
-				if(!player) return;
+				if(!queue) return;
 				await client.distube.voices.leave(queue.textChannel.guild);
-				await client.UpdateMusic(player);
+				await client.UpdateMusic(queue);
 			}
 		}
 	}
