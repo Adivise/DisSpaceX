@@ -30,13 +30,13 @@ module.exports = {
             return interaction.editReply({ embeds: [embed] });
         }
 
-        if (Number(volume) < 1 || Number(volume) > 100) return interaction.editReply(`Please provide a number between 1 and 100`)
+        if (volume < 1 || volume > 100) return interaction.editReply(`Please provide a number between 1 and 100`)
 
         await client.distube.setVolume(interaction, volume);
 
         const embed = new EmbedBuilder()
             .setColor(client.color)
-            .setDescription(`\`🔊\` | **Change volume to:** \`${args[0]}\`%`)
+            .setDescription(`\`🔊\` | **Change volume to:** \`${volume}\`%`)
 
         interaction.editReply({ embeds: [embed] });
     }

@@ -28,7 +28,7 @@ class MainClient extends Client {
     const client = this;
 
     this.distube = new DisTube(client, {
-        leaveOnEmpty: true,
+        leaveOnEmpty: false, // Don't set this to "true" for 247 Commands working!
         emptyCooldown: 60,
         leaveOnFinish: false, // Don't set this to "true" for 247 Commands working!
         leaveOnStop: true,

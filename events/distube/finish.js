@@ -7,7 +7,13 @@ module.exports = async (client, queue) => {
     const db = await GVoice.get(queue.textChannel.guild.id);
 
     if (db.voice_enable === true) {
-        return await client.UpdateMusic(queue);
+        await client.UpdateMusic(queue);
+        
+        const embed = new EmbedBuilder()
+            .setDescription(`\`📛\` | **Song has been:** \`Ended\``)
+            .setColor('#000001')
+
+        queue.textChannel.send({ embeds: [embed] })
     } else if (db.voice_enable === false) {
         await client.UpdateMusic(queue);
         await client.distube.voices.leave(queue.textChannel.guild);

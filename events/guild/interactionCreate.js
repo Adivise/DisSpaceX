@@ -7,7 +7,7 @@ module.exports = async(client, interaction) => {
         if (!interaction.guild || interaction.user.bot) return;
 
         await client.createExSetup(interaction);
-        await client.createDVoice(interaction);
+        await client.createExVoice(interaction);
 
         let subCommandName = "";
         try {

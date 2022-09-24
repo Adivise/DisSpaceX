@@ -34,18 +34,28 @@ module.exports = async (client) => {
         });
     }
 
-    client.createEVoice = async function (interaction, channel, message) {
+    client.createEVoice = async function (interaction) {
         const db = new Database("./settings/models/voice.json", { databaseInObject: true });
         await db.set(interaction.guild.id, {
             voice_enable: true,
         });
     }
 
-    client.createDVoice = async function (interaction, channel, message) {
+    client.createDVoice = async function (interaction) {
         const db = new Database("./settings/models/voice.json", { databaseInObject: true });
         await db.set(interaction.guild.id, {
             voice_enable: false,
         });
+    }
+
+    client.createExVoice = async function (interaction) {
+        const db = new Database("./settings/models/voice.json", { databaseInObject: true });
+        const database = await db.has(interaction.guild.id);
+        if (!database) {
+            await db.set(interaction.guild.id, {
+                voice_enable: false,
+            });
+        }
     }
 
     client.createPlay = async function (interaction, message) {
