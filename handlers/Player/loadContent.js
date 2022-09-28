@@ -146,6 +146,128 @@ try {
                             interaction.reply({ embeds: [embed] });
                         }
                     }
+                    break;
+
+                case "sshuffle":
+                    {
+                        if (!channel) { 
+                            return interaction.reply(`You need to be in a voice channel.`);
+                        } else if (interaction.guild.members.me.voice.channel && !interaction.guild.members.me.voice.channel.equals(channel)) {
+                            return interaction.reply(`You need to be in a voice channel.`);
+                        } else if (!queue) {
+                            return interaction.reply(`There is nothing in the queue right now!`);
+                        } else {
+                            await client.distube.shuffle(interaction);
+
+                            const embed = new EmbedBuilder()
+                                .setColor(client.color)
+                                .setDescription(`\`🔀\` | **Song has been:** \`Shuffle\``);
+
+                            interaction.reply({ embeds: [embed] });
+                            client.UpdateQueueMsg(queue);
+                        }
+                    }
+                    break;
+
+                case "svoldown":
+                    {
+                        if (!channel) { 
+                            return interaction.reply(`You need to be in a voice channel.`);
+                        } else if (interaction.guild.members.me.voice.channel && !interaction.guild.members.me.voice.channel.equals(channel)) {
+                            return interaction.reply(`You need to be in a voice channel.`);
+                        } else if (!queue) {
+                            return interaction.reply(`There is nothing in the queue right now!`);
+                        } else {
+                            await client.distube.setVolume(interaction, queue.volume - 10);
+
+                            const embed = new EmbedBuilder()
+                                .setColor(client.color)
+                                .setDescription(`\`🔊\` | **Decrease volume to:** \`${queue.volume}\`%`)
+                      
+                            interaction.reply({ embeds: [embed] });
+                            client.UpdateQueueMsg(queue);
+                        }
+                    }
+                    break;
+
+                case "sclear":
+                    {
+                        if (!channel) { 
+                            return interaction.reply(`You need to be in a voice channel.`);
+                        } else if (interaction.guild.members.me.voice.channel && !interaction.guild.members.me.voice.channel.equals(channel)) {
+                            return interaction.reply(`You need to be in a voice channel.`);
+                        } else if (!queue) {
+                            return interaction.reply(`There is nothing in the queue right now!`);
+                        } else {
+                            await queue.songs.splice(1, queue.songs.length);
+                            
+                            const embed = new EmbedBuilder()
+                                .setDescription(`\`📛\` | **Queue has been:** \`Cleared\``)
+                                .setColor(client.color);
+                
+                            interaction.reply({ embeds: [embed] });
+                            client.UpdateQueueMsg(queue);
+                        }
+                    }
+                    break;
+
+                case "svolup":
+                    {
+                        if (!channel) { 
+                            return interaction.reply(`You need to be in a voice channel.`);
+                        } else if (interaction.guild.members.me.voice.channel && !interaction.guild.members.me.voice.channel.equals(channel)) {
+                            return interaction.reply(`You need to be in a voice channel.`);
+                        } else if (!queue) {
+                            return interaction.reply(`There is nothing in the queue right now!`);
+                        } else {
+                            await client.distube.setVolume(interaction, queue.volume + 10);
+
+                            const embed = new EmbedBuilder()
+                                .setColor(client.color)
+                                .setDescription(`\`🔊\` | **Increase volume to:** \`${queue.volume}\`%`)
+                      
+                            interaction.reply({ embeds: [embed] });
+                            client.UpdateQueueMsg(queue);
+                        }
+                    }
+                    break;
+
+                case "squeue":
+                    {
+                        if (!channel) { 
+                            return interaction.reply(`You need to be in a voice channel.`);
+                        } else if (interaction.guild.members.me.voice.channel && !interaction.guild.members.me.voice.channel.equals(channel)) {
+                            return interaction.reply(`You need to be in a voice channel.`);
+                        } else if (!queue) {
+                            return interaction.reply(`There is nothing in the queue right now!`);
+                        } else {
+                            const pagesNum = Math.ceil(queue.songs.length / 10);
+                            if(pagesNum === 0) pagesNum = 1;
+                        
+                            const songStrings = [];
+                            for (let i = 1; i < queue.songs.length; i++) {
+                            const song = queue.songs[i];
+                            songStrings.push(
+                                `**${i}.** [${song.name}](${song.url}) \`[${song.formattedDuration}]\` • ${song.user}
+                                `);
+                            };
+                    
+                            const pages = [];
+                            for (let i = 0; i < pagesNum; i++) {
+                            const str = songStrings.slice(i * 10, i * 10 + 10).join('');
+                            const embed = new EmbedBuilder()
+                                .setAuthor({ name: `Queue - ${interaction.guild.name}`, iconURL: interaction.guild.iconURL({ dynamic: true })})
+                                .setThumbnail(queue.songs[0].thumbnail)
+                                .setColor(client.color)
+                                .setDescription(`**Currently Playing:**\n**[${queue.songs[0].name}](${queue.songs[0].url})** \`[${queue.songs[0].formattedDuration}]\` • ${queue.songs[0].user}\n\n**Rest of queue**${str == '' ? '  Nothing' : '\n' + str }`)
+                                .setFooter({ text: `Page • ${i + 1}/${pagesNum} | ${queue.songs.length} • Songs | ${queue.formattedDuration} • Total duration`});
+                            
+                                pages.push(embed);
+                            };
+                
+                            interaction.reply({ embeds: [pages[0]] });
+                        }
+                    }
                 break;
             default:
                 break;

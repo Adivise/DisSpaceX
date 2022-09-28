@@ -4,7 +4,7 @@ const { Database } = require("st.db");
 const GSetup = new Database("./settings/models/setup.json", { databaseInObject: true });
 
 module.exports = {
-    name: ["music", "nowplaying"],
+    name: ["nowplaying"],
     description: "Display the song currently playing.",
     category: "Music",
     run: async (client, interaction) => {

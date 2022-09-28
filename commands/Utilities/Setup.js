@@ -30,7 +30,7 @@ module.exports = {
 
             // SEND BANNER FIRST!
             await channel.send({ files: [attachment] });
-            await channel.send({ content: `${content}`, embeds: [embed], components: [client.diSwitch] }).then(async (message) => {
+            await channel.send({ content: `${content}`, embeds: [embed], components: [client.diSwitch, client.diSwitch2] }).then(async (message) => {
 
             // Create database!
             await client.createSetup(interaction, channel.id, message.id); // Can find on handlers/loadDatabase.js

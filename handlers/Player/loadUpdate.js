@@ -39,7 +39,7 @@ module.exports = async (client) => {
         return playMsg.edit({ 
             content: `**__Queue list:__**\n${Str == '' ? `Join a voice channel and queue songs by name or url in here.` : '\n' + Str}`, 
             embeds: [embed],
-            components: [client.enSwitch] 
+            components: [client.enSwitch, client.enSwitch2] 
         }).catch((e) => {});
     };
 
@@ -69,7 +69,7 @@ module.exports = async (client) => {
         return playMsg.edit({ 
             content: `${queueMsg}`, 
             embeds: [playEmbed], 
-            components: [client.diSwitch] 
+            components: [client.diSwitch, client.diSwitch2] 
         }).catch((e) => {});
     };
 };

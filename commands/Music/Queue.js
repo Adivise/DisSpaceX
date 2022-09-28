@@ -2,7 +2,7 @@ const { EmbedBuilder, ApplicationCommandOptionType } = require("discord.js");
 const { QueuePage } = require('../../structures/PageQueue.js');
 
 module.exports = {
-    name: ["music", "queue"],
+    name: ["queue"],
     description: "Show the queue of songs.",
     category: "Music",
     options: [
@@ -26,8 +26,6 @@ module.exports = {
 		const pagesNum = Math.ceil(queue.songs.length / 10);
 		if(pagesNum === 0) pagesNum = 1;
 
-        const qduration = queue.formattedDuration;
-
 		const songStrings = [];
 		for (let i = 1; i < queue.songs.length; i++) {
 			const song = queue.songs[i];
@@ -49,7 +47,7 @@ module.exports = {
 		}
 
 		if (!args) {
-			if (pages.length == pagesNum && queue.songs.length > 10) QueuePage(client, interaction, pages, 60000, queue.songs.length, qduration);
+			if (pages.length == pagesNum && queue.songs.length > 10) QueuePage(client, interaction, pages, 60000, queue.songs.length, queue.formattedDuration);
 			else return interaction.editReply({ embeds: [pages[0]] });
 		}
 		else {

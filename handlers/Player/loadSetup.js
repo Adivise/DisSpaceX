@@ -26,6 +26,30 @@ module.exports = async (client) => {
                 .setEmoji("🔄"),
         ]);
 
+    client.enSwitch2 = new ActionRowBuilder()
+        .addComponents([
+            new ButtonBuilder()
+                .setStyle(ButtonStyle.Primary)
+                .setCustomId("sshuffle")
+                .setEmoji("🔀"),
+            new ButtonBuilder()
+                .setStyle(ButtonStyle.Success)
+                .setCustomId("svoldown")
+                .setEmoji("🔉"),
+            new ButtonBuilder()
+                .setStyle(ButtonStyle.Secondary)
+                .setCustomId("sclear")
+                .setEmoji("🗑"),
+            new ButtonBuilder()
+                .setStyle(ButtonStyle.Success)
+                .setCustomId("svolup")
+                .setEmoji("🔊"),
+            new ButtonBuilder()
+                .setStyle(ButtonStyle.Primary)
+                .setCustomId("squeue")
+                .setEmoji("📋"),
+        ]);
+
     client.diSwitch = new ActionRowBuilder()
         .addComponents([
             new ButtonBuilder()
@@ -52,6 +76,35 @@ module.exports = async (client) => {
                 .setStyle(ButtonStyle.Secondary)
                 .setCustomId("sloop")
                 .setEmoji("🔄")
+                .setDisabled(true),
+        ]);
+
+    client.diSwitch2 = new ActionRowBuilder()
+        .addComponents([
+            new ButtonBuilder()
+                .setStyle(ButtonStyle.Secondary)
+                .setCustomId("sshuffle")
+                .setEmoji("🔀")
+                .setDisabled(true),
+            new ButtonBuilder()
+                .setStyle(ButtonStyle.Secondary)
+                .setCustomId("svoldown")
+                .setEmoji("🔉")
+                .setDisabled(true),
+            new ButtonBuilder()
+                .setStyle(ButtonStyle.Secondary)
+                .setCustomId("sclear")
+                .setEmoji("🗑")
+                .setDisabled(true),
+            new ButtonBuilder()
+                .setStyle(ButtonStyle.Secondary)
+                .setCustomId("svolup")
+                .setEmoji("🔊")
+                .setDisabled(true),
+            new ButtonBuilder()
+                .setStyle(ButtonStyle.Secondary)
+                .setCustomId("squeue")
+                .setEmoji("📋")
                 .setDisabled(true),
         ]);
 };

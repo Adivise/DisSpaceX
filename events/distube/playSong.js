@@ -68,9 +68,7 @@ module.exports = async (client, queue, track) => {
       if (!queue) {
         collector.stop();
       }
-
-      await client.distube.stop(message.guild.id);
-
+      await client.distube.voices.leave(message.guild);
       const embed = new EmbedBuilder()
         .setDescription(`\`🚫\` | **Song has been:** | \`Stopped\``)
         .setColor('#000001');
@@ -112,10 +110,83 @@ module.exports = async (client, queue, track) => {
           .setColor("#000001")
           .setDescription("\`⏮\` | **Song has been:** `Previous`")
 
-        nowplay.edit({ components: [] });
+        await nowplay.edit({ components: [] });
         message.reply({ embeds: [embed], ephemeral: true });
       }
+    } else if (id === "shuffle") {
+      if (!queue) {
+        collector.stop();
+      }
+      await client.distube.shuffle(message);
+      const embed = new EmbedBuilder()
+          .setColor(client.color)
+          .setDescription(`\`🔀\` | **Song has been:** \`Shuffle\``);
+
+      message.reply({ embeds: [embed], ephemeral: true });
+    } else if (id === "voldown") {
+      if (!queue) {
+        collector.stop();
+      }
+      await client.distube.setVolume(message, queue.volume - 5);
+      const embed = new EmbedBuilder()
+          .setColor(client.color)
+          .setDescription(`\`🔊\` | **Decrease volume to:** \`${queue.volume}\`%`)
+
+      message.reply({ embeds: [embed], ephemeral: true });
+    } else if (id === "clear") {
+      if (!queue) {
+        collector.stop();
+      }
+      await queue.songs.splice(1, queue.songs.length);
+      await client.UpdateQueueMsg(queue);
+      
+      const embed = new EmbedBuilder()
+          .setDescription(`\`📛\` | **Queue has been:** \`Cleared\``)
+          .setColor(client.color);
+
+      message.reply({ embeds: [embed], ephemeral: true });
+    } else if (id === "volup") {
+      if (!queue) {
+        collector.stop();
+      }
+      await client.distube.setVolume(message, queue.volume + 5);
+      const embed = new EmbedBuilder()
+          .setColor(client.color)
+          .setDescription(`\`🔊\` | **Increase volume to:** \`${queue.volume}\`%`)
+
+      message.reply({ embeds: [embed], ephemeral: true });
+    } else if (id === "queue") {
+      if (!queue) {
+        collector.stop();
+      }
+      const pagesNum = Math.ceil(queue.songs.length / 10);
+      if(pagesNum === 0) pagesNum = 1;
+  
+      const songStrings = [];
+      for (let i = 1; i < queue.songs.length; i++) {
+        const song = queue.songs[i];
+        songStrings.push(
+          `**${i}.** [${song.name}](${song.url}) \`[${song.formattedDuration}]\` • ${song.user}
+          `);
+      };
+
+      const pages = [];
+      for (let i = 0; i < pagesNum; i++) {
+        const str = songStrings.slice(i * 10, i * 10 + 10).join('');
+        const embed = new EmbedBuilder()
+          .setAuthor({ name: `Queue - ${message.guild.name}`, iconURL: message.guild.iconURL({ dynamic: true })})
+          .setThumbnail(queue.songs[0].thumbnail)
+          .setColor(client.color)
+          .setDescription(`**Currently Playing:**\n**[${queue.songs[0].name}](${queue.songs[0].url})** \`[${queue.songs[0].formattedDuration}]\` • ${queue.songs[0].user}\n\n**Rest of queue**${str == '' ? '  Nothing' : '\n' + str }`)
+          .setFooter({ text: `Page • ${i + 1}/${pagesNum} | ${queue.songs.length} • Songs | ${queue.formattedDuration} • Total duration`});
+        
+        pages.push(embed);
+      };
+
+      message.reply({ embeds: [pages[0]], ephemeral: true });
     }
+
+
   });
   collector.on('end', async (collected, reason) => {
     if (reason === "time") {
@@ -125,7 +196,7 @@ module.exports = async (client, queue, track) => {
 }
 
 function disspace(nowQueue, nowTrack) {
-  const embeded = new EmbedBuilder()
+  const embed = new EmbedBuilder()
     .setAuthor({ name: `Starting Playing...`, iconURL: 'https://cdn.discordapp.com/emojis/741605543046807626.gif' })
     .setThumbnail(nowTrack.thumbnail)
     .setColor('#000001')
@@ -175,8 +246,46 @@ function disspace(nowQueue, nowTrack) {
         .setEmoji("🔄")
         .setStyle(ButtonStyle.Success)
     )
+
+    const row2 = new ActionRowBuilder()
+    .addComponents(
+      new ButtonBuilder()
+        .setCustomId("shuffle")
+        .setLabel(`Shuffle`)
+        .setEmoji(`🔀`)
+        .setStyle(ButtonStyle.Primary)
+    )
+    .addComponents(
+      new ButtonBuilder()
+        .setCustomId("voldown")
+        .setLabel(`Vol -`)
+        .setEmoji(`🔉`)
+        .setStyle(ButtonStyle.Success)
+    )
+    .addComponents(
+      new ButtonBuilder()
+        .setCustomId("clear")
+        .setLabel(`Clear`)
+        .setEmoji(`🗑`)
+        .setStyle(ButtonStyle.Secondary)
+    )
+    .addComponents(
+      new ButtonBuilder()
+        .setCustomId("volup")
+        .setLabel(`Vol +`)
+        .setEmoji(`🔊`)
+        .setStyle(ButtonStyle.Success)
+    )
+    .addComponents(
+      new ButtonBuilder()
+        .setCustomId("queue")
+        .setLabel(`Queue`)
+        .setEmoji(`📋`)
+        .setStyle(ButtonStyle.Primary)
+    )
+
   return {
-    embeds: [embeded],
-    components: [row]
+    embeds: [embed],
+    components: [row, row2]
   }
 }
