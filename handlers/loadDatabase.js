@@ -60,12 +60,22 @@ module.exports = async (client) => {
 
     client.createPlay = async function (interaction, message) {
         const db = new Database("./settings/models/message.json", { databaseInObject: true });
-        
         await db.set(interaction.guild.id, {
             channel_id: interaction.channel.id,
             message_id: message
         });
     };
+
+    client.addCount = async function (cmdname) {
+        const db = new Database("./settings/models/stats.json", { databaseInObject: true });
+        await db.add({ key: cmdname, value: 1 });
+    }
+
+    client.addChart = async function (id) {
+        const db = new Database("./settings/models/chart.json", { databaseInObject: true });
+        await db.add({ key: id, value: 1 });
+    }
+
 
     client.interval = null;
 

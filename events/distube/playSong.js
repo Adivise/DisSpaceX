@@ -6,6 +6,7 @@ const GSetup = new Database("./settings/models/setup.json", { databaseInObject: 
 module.exports = async (client, queue, track) => {
   
   await client.UpdateQueueMsg(queue);
+  await client.addChart(track.id);
 
   const db = await GSetup.get(queue.textChannel.guild.id);
   if (db.setup_enable === true) return;

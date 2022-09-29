@@ -52,6 +52,7 @@ module.exports = async(client, interaction) => {
     if (!command) return;
     if (command) {
         try {
+            client.addCount(command.name.at(-1));
             command.run(client, interaction);
         } catch (error) {
             console.log(error);
