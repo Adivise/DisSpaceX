@@ -25,7 +25,7 @@ module.exports = {
 
         const TopUsable = [];
         for (let i = 0; i < all.length; i++) {
-            const name = all[i].ID.UppertoLowerCase();
+            const name = all[i].ID;
             const usable = all[i].data;
 
             TopUsable.push(
