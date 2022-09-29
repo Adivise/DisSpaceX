@@ -18,10 +18,11 @@ module.exports = {
         embed.setFooter({ text: `© ${interaction.guild.members.me.displayName} | Total Commands: ${client.slash.size}`, iconURL: client.user.displayAvatarURL({ dynamic: true })});
 
         categories.forEach(category => {
-            const dir = client.slash.filter(c => c.category === category)
-            const capitalise = category.slice(0, 1).toUpperCase() + category.slice(1)
+            const dir = client.slash.filter(c => c.category === category);
+            const capitalise = category.slice(0, 1).toUpperCase() + category.slice(1);
+
             try {
-                embed.addFields({ name: `❯ ${capitalise} [${dir.size}]:`, value: dir.map(c => `\`${c.name}\``).join(" | "), inline: false })
+                embed.addFields({ name: `❯ ${capitalise} [${dir.size}]:`, value: `${dir.map(c => `\`${c.name.at(-1)}\``).join(", ")}`, inline: false })
             } catch(e) {
                 console.log(e)
             }
