@@ -55,7 +55,7 @@ module.exports = async(client, interaction) => {
             command.run(client, interaction);
         } catch (error) {
             console.log(error);
-            await interaction.reply({ content: `${client.i18n.get(language, "interaction", "error")}`, ephmeral: true });
+            await interaction.reply({ content: `Something went wrong!`, ephmeral: true });
         }}
     }
 }
