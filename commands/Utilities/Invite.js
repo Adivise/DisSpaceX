@@ -18,7 +18,7 @@ module.exports = {
             .addComponents(
                 new ButtonBuilder()
                     .setLabel("Invite")
-                    .setURL(`https://discord.com/api/oauth2/authorize?client_id=${client.user.id}&permissions=0&scope=bot`)
+                    .setURL(`https://discord.com/api/oauth2/authorize?client_id=${client.user.id}&permissions=2184310032&scope=bot%20applications.commands`)
                     .setEmoji("🔗")
                     .setStyle(ButtonStyle.Link)
             )
