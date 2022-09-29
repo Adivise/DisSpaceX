@@ -27,7 +27,7 @@ module.exports = {
         const TopChart = [];
         for (let i = 0; i < all.length; i++) {
             const format = `https://youtu.be/${all[i].ID}`;
-            const search = await ytsr(format);
+            const search = await ytsr(format, { limit: 1 });
             const track = search.items[0]; 
 
             TopChart.push(
