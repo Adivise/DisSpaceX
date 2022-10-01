@@ -34,9 +34,7 @@ class MainClient extends Client {
         leaveOnStop: true,
         plugins: [
             new SoundCloudPlugin(),
-            new SpotifyPlugin({
-                emitEventsAfterFetching: true
-            })
+            checkSpotify(client)
         ],
     });
 
@@ -50,3 +48,29 @@ class MainClient extends Client {
 };
 
 module.exports = MainClient;
+
+function checkSpotify(client) {
+    if (client.config.SPOTIFY_TRACKS) {
+        console.log("[INFO] You're (Enabled) Spotify More Tracks Support!");
+        return spotifyOn(client);
+    } else {
+        console.log("[INFO] You're (Not Enabled) Spotify More Tracks Support!");
+        return spotifyOff();
+    }
+}
+
+function spotifyOn(client) {
+    return new SpotifyPlugin({
+        emitEventsAfterFetching: true,
+        api: {
+            clientId: client.config.SPOTIFY_ID,
+            clientSecret: client.config.SPOTIFY_SECRET
+        }
+    })
+}
+
+function spotifyOff() {
+    return new SpotifyPlugin({
+        emitEventsAfterFetching: true,
+    })
+}

@@ -7,5 +7,24 @@ module.exports = {
 
     // Default autocomplete search
     SEARCH_DEFAULT: ["lo fi", "jvke", "post malone", "bassboost"],
-    LEAVE_EMPTY: 120000, // 1000 = 1 sec
+    // Leave voice empty
+    LEAVE_EMPTY: parseInt(process.env.LEAVE_EMPTY || "120000"), // 1000 = 1 sec
+
+    // Spotify support playlist more 100+ track || false = default || Can get from here: https://developer.spotify.com/dashboard/applications
+    SPOTIFY_TRACKS: parseBoolean(process.env.SPOTIFY_TRACKS || false),
+    SPOTIFY_ID: process.env.SPOTIFY_ID || "SPOTIFY_CLIENT_ID",
+    SPOTIFY_SECRET: process.env.SPOTIFY_SECRET ||"SPOTIFY_CLIENT_SECRET"
+}
+
+function parseBoolean(ask) {
+    if (typeof (ask) === 'string') {
+        ask = ask.trim().toLowerCase();
+    }
+    switch (ask) {
+        case true:
+        case "true":
+            return true;
+        default:
+            return false;
+    }
 }
