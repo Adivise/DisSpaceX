@@ -9,7 +9,7 @@
 ## 📑 Feature
 - [x] Music System
 - [x] Filters System
-- [x] AutoComplete (Play Commands!)
+- [x] AutoComplete (Play, PlaySkip, PlayTop)
 - [x] Song Request Channel
 - [x] Context Message Menu
 - [x] Message Button
