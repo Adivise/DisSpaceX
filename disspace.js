@@ -7,6 +7,7 @@ class MainClient extends Client {
     constructor() {
         super({
             shards: "auto",
+            allowedMentions: { parse: ["users", "roles"] },
             intents: [
                 GatewayIntentBits.Guilds,
                 GatewayIntentBits.GuildMembers,
