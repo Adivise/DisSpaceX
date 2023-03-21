@@ -2,6 +2,7 @@ const { Client, Collection, GatewayIntentBits, Partials } = require("discord.js"
 const { DisTube } = require('distube');
 const { SoundCloudPlugin } = require('@distube/soundcloud');
 const { SpotifyPlugin } = require('@distube/spotify');
+const { DeezerPlugin } = require('@distube/deezer');
 
 class MainClient extends Client {
     constructor() {
@@ -35,6 +36,7 @@ class MainClient extends Client {
         leaveOnStop: true,
         plugins: [
             new SoundCloudPlugin(),
+            new DeezerPlugin(),
             checkSpotify(client)
         ],
     });
