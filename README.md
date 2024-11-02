@@ -24,6 +24,11 @@
 - [x] Youtube
 - [x] SoundCloud
 - [x] Spotify
+- [x] Deezer
+- [x] Apple Music
+- [x] Tidal
+- [x] Direct Link .mp3 file
+- [x] And More 700+ Site Support
 
 ## 🚨 Have a Problem
 
@@ -34,6 +39,8 @@
 
 Node.js **[Download](https://nodejs.org/dist/v17.0.1/node-v17.0.1-x64.msi)**
 
+FFmpeg **[Download!!](https://github.com/BtbN/FFmpeg-Builds/releases/download/latest/ffmpeg-master-latest-win64-gpl.zip)**
+
 Discord Bot Token **[Guide](https://discordjs.guide/preparations/setting-up-a-bot-application.html#creating-your-bot)**
 
 ## 💌 Installation
@@ -43,7 +50,7 @@ git clone https://github.com/Adivise/DisSpaceX
 cd DisSpaceX
 npm install
 ```
-After installation finishes you can use `node .` to start the bot. or `Run Start.bat`
+After installation finishes please drag **ffmpeg.exe** file into DisSpaceX folder and you can use `node .` to start the bot. or `Run Start.bat`
 
 ## 📚 Configuration
 
@@ -118,3 +125,5 @@ EMBED_COLOR=#000001
 - Invite (/utilities invite)
 - Restart (/utilities restart)
 - Setup (/utilities setup)
+- Top Chart (/topchart)
+- Usable Stats (/usestats)

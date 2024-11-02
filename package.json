@@ -1,6 +1,6 @@
 {
   "name": "disspacex",
-  "version": "5.7.0",
+  "version": "6.0.0",
   "description": "✈ Join Discord: https://discord.gg/SNG3dh3MbR",
   "main": "index.js",
   "scripts": {
@@ -9,28 +9,30 @@
   "author": "Adivise",
   "license": "MIT",
   "dependencies": {
-    "@discordjs/voice": "^0.16.1",
-    "@distube/deezer": "^1.0.0",
-    "@distube/soundcloud": "^1.3.3",
-    "@distube/spotify": "^1.5.2",
+    "@distube/deezer": "^2.0.1",
+    "@distube/direct-link": "^1.0.1",
+    "@distube/soundcloud": "^2.0.4",
+    "@distube/spotify": "^2.0.2",
+    "@distube/youtube": "^1.0.4",
+    "@distube/yt-dlp": "^2.0.1",
+    "@distube/ytsr": "^2.0.4",
     "chalk": "^4.1.2",
     "chillout": "^5.0.0",
     "delay": "^5.0.0",
-    "discord.js": "^14.14.1",
-    "distube": "^4.1.1",
-    "dotenv": "^14.3.2",
-    "ffmpeg-static": "^4.4.1",
-    "figlet": "^1.5.2",
-    "libsodium-wrappers": "^0.7.10",
+    "discord.js": "^14.16.3",
+    "distube": "^5.0.4",
+    "distube-apple-music": "^0.1.0",
+    "distube-tidal": "^0.1.0",
+    "dotenv": "^16.4.5",
+    "ffmpeg-static": "^5.2.0",
+    "figlet": "^1.8.0",
+    "libsodium-wrappers": "^0.7.15",
     "lyrics-finder": "^21.7.0",
     "opusscript": "^0.0.8",
     "path": "^0.12.7",
     "plsargs": "^0.1.6",
-    "recursive-readdir": "^2.2.2",
+    "recursive-readdir": "^2.2.3",
     "st.db": "^5.1.4",
-    "stuffs": "^0.1.17"
-  },
-  "devDependencies": {
-    "node": "^17.0.1"
+    "stuffs": "^0.1.42"
   }
 }

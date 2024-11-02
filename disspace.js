@@ -3,6 +3,11 @@ const { DisTube } = require('distube');
 const { SoundCloudPlugin } = require('@distube/soundcloud');
 const { SpotifyPlugin } = require('@distube/spotify');
 const { DeezerPlugin } = require('@distube/deezer');
+const { YouTubePlugin } = require('@distube/youtube');
+const { DirectLinkPlugin } = require('@distube/direct-link');
+const { YtDlpPlugin } = require('@distube/yt-dlp');
+const { AppleMusicPlugin } = require('distube-apple-music');
+const { TidalPlugin } = require('distube-tidal');
 
 class MainClient extends Client {
     constructor() {
@@ -30,11 +35,15 @@ class MainClient extends Client {
     const client = this;
 
     this.distube = new DisTube(client, {
-        leaveOnEmpty: false, // Don't set this to "true" for 247 Commands working!
-        emptyCooldown: 60,
-        leaveOnFinish: false, // Don't set this to "true" for 247 Commands working!
-        leaveOnStop: true,
+        savePreviousSongs: true,
+        emitAddListWhenCreatingQueue: true,
+        emitAddSongWhenCreatingQueue: true,
         plugins: [
+            new TidalPlugin(),
+            new AppleMusicPlugin(),
+            new YtDlpPlugin({ update: false }),
+            new DirectLinkPlugin(),
+            new YouTubePlugin(),
             new SoundCloudPlugin(),
             new DeezerPlugin(),
             checkSpotify(client)
@@ -64,7 +73,6 @@ function checkSpotify(client) {
 
 function spotifyOn(client) {
     return new SpotifyPlugin({
-        emitEventsAfterFetching: true,
         api: {
             clientId: client.config.SPOTIFY_ID,
             clientSecret: client.config.SPOTIFY_SECRET
@@ -73,7 +81,5 @@ function spotifyOn(client) {
 }
 
 function spotifyOff() {
-    return new SpotifyPlugin({
-        emitEventsAfterFetching: true,
-    })
+    return new SpotifyPlugin({})
 }
