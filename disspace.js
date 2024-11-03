@@ -63,10 +63,10 @@ module.exports = MainClient;
 
 function checkSpotify(client) {
     if (client.config.SPOTIFY_TRACKS) {
-        console.log("[INFO] You're (Enabled) Spotify More Tracks Support!");
+    //    console.log("[INFO] You're (Enabled) Spotify More Tracks Support!");
         return spotifyOn(client);
     } else {
-        console.log("[INFO] You're (Not Enabled) Spotify More Tracks Support!");
+    //    console.log("[INFO] You're (Not Enabled) Spotify More Tracks Support!");
         return spotifyOff();
     }
 }

@@ -12,7 +12,7 @@ module.exports = async (client, queue, track) => {
   if (db.setup_enable === true) return;
 
   var newQueue = client.distube.getQueue(queue.id)
-  var data = disspace(newQueue, track)
+  var data = disspace(newQueue, track ,client)
 
   const nowplay = await queue.textChannel.send(data)
 
@@ -176,7 +176,7 @@ module.exports = async (client, queue, track) => {
         const str = songStrings.slice(i * 10, i * 10 + 10).join('');
         const embed = new EmbedBuilder()
           .setAuthor({ name: `Queue - ${message.guild.name}`, iconURL: message.guild.iconURL({ dynamic: true })})
-          .setThumbnail(queue.songs[0].thumbnail)
+          .setThumbnail(queue.songs[0].thumbnail || client.user.displayAvatarURL())
           .setColor(client.color)
           .setDescription(`**Currently Playing:**\n**[${queue.songs[0].name}](${queue.songs[0].url})** \`[${queue.songs[0].formattedDuration}]\` • ${queue.songs[0].user}\n\n**Rest of queue**${str == '' ? '  Nothing' : '\n' + str }`)
           .setFooter({ text: `Page • ${i + 1}/${pagesNum} | ${queue.songs.length} • Songs | ${queue.formattedDuration} • Total duration`});
@@ -196,13 +196,13 @@ module.exports = async (client, queue, track) => {
   });
 }
 
-function disspace(nowQueue, nowTrack) {
+function disspace(nowQueue, nowTrack, client) {
   const embed = new EmbedBuilder()
     .setAuthor({ name: `Starting Playing...`, iconURL: 'https://cdn.discordapp.com/emojis/741605543046807626.gif' })
-    .setThumbnail(nowTrack.thumbnail)
+    .setThumbnail(nowTrack.thumbnail || client.user.displayAvatarURL())
     .setColor('#000001')
     .setDescription(`**[${nowTrack.name}](${nowTrack.url})**`)
-    .addFields({ name: `Uploader:`, value: `**[${nowTrack.uploader.name}](${nowTrack.uploader.url})**`, inline: true })
+    .addFields({ name: `Uploader:`, value: `**[${nowTrack.uploader.name || "Anonymous"}](${nowTrack.uploader.url || "https://www.github.com/Adivise"})**`, inline: true })
     .addFields({ name: `Requester:`, value: `${nowTrack.user}`, inline: true })
     .addFields({ name: `Current Volume:`, value: `${nowQueue.volume}%`, inline: true })
     .addFields({ name: `Filters:`, value: `${nowQueue.filters.names.join(", ") || "Normal"}`, inline: true })
