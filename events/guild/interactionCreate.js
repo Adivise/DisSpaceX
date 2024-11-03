@@ -1,6 +1,10 @@
-const { InteractionType, PermissionsBitField } = require("discord.js");
+const { InteractionType } = require("discord.js");
 const ytsr = require("@distube/ytsr");
-const { SEARCH_DEFAULT } = require("../../settings/config.js")
+const { SEARCH_DEFAULT } = require("../../settings/config.js");
+const { Database } = require("st.db");
+const { red } = require('chalk');
+
+const BStats = new Database("./settings/models/stats.json", { databaseInObject: true });
 
 module.exports = async(client, interaction) => {
     if (interaction.isCommand || interaction.isContextMenuCommand || interaction.isModalSubmit || interaction.isChatInputCommand) {
@@ -54,6 +58,7 @@ module.exports = async(client, interaction) => {
         try {
             client.addCount(command.name.at(-1));
             command.run(client, interaction);
+            console.log(`[COMMAND] ${command.name.at(-1)} executed by ${interaction.user.tag} | [${client.user.tag}] in ${interaction.guild.name} (${interaction.guild.id}) | Total Used: ${BStats.all().find((i) => i.ID === command.name.at(-1)).data} times.`);
         } catch (error) {
             console.log(error);
             await interaction.reply({ content: `Something went wrong!`, ephmeral: true });
